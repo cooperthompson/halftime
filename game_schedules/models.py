@@ -23,6 +23,8 @@ class Organization(models.Model):
 class Field(models.Model):
     name = models.CharField(max_length=50)
     short_name = models.CharField(max_length=10)
+    number = models.IntegerField(null=1, blank=1)
+    organization = models.ForeignKey(Organization, null=True, blank=True)
 
     class Meta:
         managed = True
@@ -76,7 +78,7 @@ class Team(models.Model):
     color = models.CharField(max_length=100)
     league = models.ForeignKey(League, related_name='teams')
     manager = models.ForeignKey(User, blank=True, null=True, related_name='manager')
-    roster = models.ManyToManyField(User, blank=True, null=True, related_name='player')
+    roster = models.ManyToManyField(User, related_name='player')
 
     class Meta:
         ordering = ['number']
@@ -104,7 +106,7 @@ class Game(models.Model):
     league = models.ForeignKey(League)
     teams = models.ManyToManyField(Team)
     time = models.DateTimeField()
-    field = models.ForeignKey(Field)
+    field = models.ForeignKey(Field, null=True, blank=True)
 
     @property
     def is_today(self):
