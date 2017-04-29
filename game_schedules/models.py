@@ -5,12 +5,12 @@ from __future__ import unicode_literals
 from datetime import date
 from django.db import models
 from urlparse import urlparse
-from collections import defaultdict
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 class Organization(models.Model):
     name = models.CharField(max_length=100)
+    short_name = models.CharField(max_length=4, null=True, blank=True)
 
     class Meta:
         managed = True
@@ -29,6 +29,12 @@ class Field(models.Model):
     class Meta:
         managed = True
         db_table = 'soccer_fields'
+
+    def __unicode__(self):
+        if self.name:
+            return self.name
+
+        return str(self.number)
 
 
 class Season(models.Model):
@@ -117,15 +123,12 @@ class Game(models.Model):
 
     @property
     def color_conflict(self):
-        colors = defaultdict()
-        color_conflict = False
-
-        for team in self.teams.all():
-            colors[team.color] += 1
-            if colors[team.color] > 1:
-                color_conflict = True
-
-        return color_conflict
+        if self.teams.count() == 2:
+            home_team = self.teams.all()[0]
+            away_team = self.teams.all()[1]
+            if home_team.color == away_team.color:
+                return True
+        return False
 
     class Meta:
         ordering = ['time']

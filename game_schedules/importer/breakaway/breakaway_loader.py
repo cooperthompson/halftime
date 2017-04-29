@@ -18,7 +18,8 @@ class BreakawayLoader:
         try:
             org = Organization.objects.get(name="Breakaway")
         except Organization.DoesNotExist:
-            org = Organization(name="Breakaway")
+            org = Organization(name="Breakaway",
+                               short_name="BA")
             org.save()
 
         return org
@@ -72,7 +73,7 @@ class BreakawayLoader:
             league = League.objects.get(key=key)
         except League.DoesNotExist:
             self.logger.info("Couldn't find league %s.  Creating on-the-fly." % key)
-            slug = key.replace(" ", "_")
+            slug = key.replace(" ", "-").lower()
 
             # default the name to be the key.
             # the name can be updated in the admin GUI to something user-readable.

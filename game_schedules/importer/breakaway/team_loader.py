@@ -6,8 +6,9 @@ from game_schedules.models import *
 
 
 class TeamFileLoader:
-    def __init__(self, logger=logging.getLogger(__name__)):
+    def __init__(self, organization, logger=logging.getLogger(__name__)):
         self.logger = logger
+        self.organization = organization
 
     def load_team_file(self, text_filename, league):
         with codecs.open(text_filename, encoding='utf-8', mode='r') as text_file:
@@ -38,7 +39,7 @@ class TeamFileLoader:
             team_name = unidecode(match[1].strip())
             team_color = unidecode(match[2].strip())
 
-            slug = team_name.replace(" ", "_")
+            slug = team_name.replace(" ", "-").lower()
 
             try:
                 team = Team.objects.filter(league=league).get(slug=slug)

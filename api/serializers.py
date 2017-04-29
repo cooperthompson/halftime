@@ -3,21 +3,58 @@ from rest_framework import serializers
 from game_schedules.models import *
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'teams', )
+        fields = '__all__'
 
 
-class TeamSerializer(serializers.ModelSerializer):
+class GroupSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Group
+        fields = '__all__'
+
+
+class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Organization
+        fields = '__all__'
+
+
+class FieldSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Field
+        fields = '__all__'
+
+
+class SeasonSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Season
+        fields = '__all__'
+
+
+class LeagueSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = League
+        fields = '__all__'
+
+
+class TeamSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Team
+        fields = '__all__'
 
 
-class GameSerializer(serializers.ModelSerializer):
-    #league = serializers.HyperlinkedIdentityField('league', view_name='league-list')
+class GameSerializer(serializers.HyperlinkedModelSerializer):
+    teams = TeamSerializer(many=True, read_only=True)
+    field = serializers.StringRelatedField()
+    league = serializers.StringRelatedField()
 
     class Meta:
         model = Game
-        fields = ('name', 'league', 'teams', 'time', 'field', 'is_today', 'color_conflict')
+        fields = '__all__'

@@ -30,5 +30,10 @@ class Command(BaseCommand):
         if options['games']:
             self.loader.load_games()
         if options['reset']:
+            Organization.objects.all().delete()
+            Field.objects.all().delete()
+            Season.objects.all().delete()
+            League.objects.all().delete()
+            Game.objects.all().delete()
             Team.objects.all().delete()
 

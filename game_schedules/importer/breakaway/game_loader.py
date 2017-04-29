@@ -41,7 +41,7 @@ class GameFileLoader:
             away_team = self.get_team(int(match.group(2)), league)
             game_time = self.parse_game_time(match.group(3), game_date)
             game_field = self.parse_game_field(match.group(4))
-            game_name = '{} vs. {}'.format(home_team, away_team)
+            game_name = '{} vs. {} at {}'.format(home_team, away_team, game_field.name)
 
             game = Game(name=game_name,
                         time=game_time,
@@ -69,7 +69,10 @@ class GameFileLoader:
             field = Field.objects.filter(organization=self.organization).get(number=field_number)
         except Field.DoesNotExist:
             field = Field(organization=self.organization,
-                          number=field_number)
+                          number=field_number,
+                          name="{} Field {}".format(self.organization, field_number),
+                          short_name="{}-F{}".format(self.organization.short_name, field_number)
+                          )
             field.save()
 
         return field
