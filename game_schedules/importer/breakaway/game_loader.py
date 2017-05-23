@@ -47,9 +47,8 @@ class GameFileLoader:
                         time=game_time,
                         league=home_team.league)
             game.field = game_field
-            game.save()
-            game.teams.add(home_team)
-            game.teams.add(away_team)
+            game.home_team = home_team
+            game.away_team = away_team
             try:
                 game.save()
             except Exception as e:

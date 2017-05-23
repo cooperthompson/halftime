@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from smart_selects.db_fields import ChainedForeignKey
+from game_schedules.managers import *
 
 # Create your models here.
 from datetime import date
@@ -57,6 +58,7 @@ class League(models.Model):
     org = models.ForeignKey(Organization, related_name='org', null=True, blank=True)
     key = models.CharField(max_length=100)
     is_active = models.BooleanField(default=False)
+    logo = models.ImageField(null=True, blank=True)
 
     class Meta:
         managed = True
@@ -110,7 +112,14 @@ class Game(models.Model):
     # many-to-many field when constructing the name.
     name = models.CharField(max_length=100)  # Example name:  "Stormtroopers vs. Whistlers"
     league = models.ForeignKey(League)
-    teams = models.ManyToManyField(Team)
+    home_team = ChainedForeignKey(Team,
+                                  chained_field='league',
+                                  chained_model_field='league',
+                                  related_name='home_team')
+    away_team = ChainedForeignKey(Team,
+                                  chained_field='league',
+                                  chained_model_field='league',
+                                  related_name='away_team')
     time = models.DateTimeField()
     field = models.ForeignKey(Field, null=True, blank=True)
 
@@ -123,12 +132,10 @@ class Game(models.Model):
 
     @property
     def color_conflict(self):
-        if self.teams.count() == 2:
-            home_team = self.teams.all()[0]
-            away_team = self.teams.all()[1]
-            if home_team.color == away_team.color:
-                return True
-        return False
+        if self.home_team.color.upper() == self.away_team.color.upper():
+            return True
+        else:
+            return False
 
     class Meta:
         ordering = ['time']

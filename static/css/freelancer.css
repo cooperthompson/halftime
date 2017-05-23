@@ -192,17 +192,17 @@ section.success {
     padding-top: 75px;
   }
 }
-#portfolio .portfolio-item {
+#leagues .league-item {
   margin: 0 0 15px;
   right: 0;
 }
-#portfolio .portfolio-item .portfolio-link {
+#leagues .league-item .league-link {
   display: block;
   position: relative;
   max-width: 400px;
   margin: 0 auto;
 }
-#portfolio .portfolio-item .portfolio-link .caption {
+#leagues .league-item .league-link .caption {
   background: rgba(24, 188, 156, 0.9);
   position: absolute;
   width: 100%;
@@ -212,10 +212,10 @@ section.success {
   -webkit-transition: all ease 0.5s;
   -moz-transition: all ease 0.5s;
 }
-#portfolio .portfolio-item .portfolio-link .caption:hover {
+#leagues .league-item .league-link .caption:hover {
   opacity: 1;
 }
-#portfolio .portfolio-item .portfolio-link .caption .caption-content {
+#leagues .league-item .league-link .caption .caption-content {
   position: absolute;
   width: 100%;
   height: 20px;
@@ -225,18 +225,18 @@ section.success {
   margin-top: -12px;
   color: white;
 }
-#portfolio .portfolio-item .portfolio-link .caption .caption-content i {
+#leagues .league-item .league-link .caption .caption-content i {
   margin-top: -12px;
 }
-#portfolio .portfolio-item .portfolio-link .caption .caption-content h3,
-#portfolio .portfolio-item .portfolio-link .caption .caption-content h4 {
+#leagues .league-item .league-link .caption .caption-content h3,
+#leagues .league-item .league-link .caption .caption-content h4 {
   margin: 0;
 }
-#portfolio * {
+#leagues * {
   z-index: 2;
 }
 @media (min-width: 767px) {
-  #portfolio .portfolio-item {
+  #leagues .league-item {
     margin: 0 0 30px;
   }
 }

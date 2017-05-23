@@ -41,4 +41,6 @@
         });
     });
 
+    $('.datepicker').datepicker();
+
 })(jQuery); // End of use strict
