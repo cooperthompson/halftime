@@ -72,17 +72,28 @@
                 <form action="" method="GET">
                     {% csrf_token %}
                     {{ form.date }}
-                    <input type="submit" class="btn btn-info" value="Submit">
+                    <input type="submit" class="btn btn-info" value="Go!">
                 </form>
             </div>
             <div class="row">
+                <table class="table table-bordered table-striped">
+                <thead>
+                <th>Field</th>
+                <th>Home Team</th>
+                <th>Away Team</th>
+                <th>Game Time</th>
+                </thead>
+                <tbody>
                 {% for game in games %}
-                <div class="col-sm-6 game-item">
-                    <a href="#gameModal1" class="game-link" data-toggle="modal">
-                        {{ game.name }} {{ game.time }} {{ game.field }}
-                    </a>
-                </div>
+                    <tr>
+                        <td>{{ game.field }}</td>
+                        <td>{{ game.home_team }}</td>
+                        <td>{{ game.away_team }}</td>
+                        <td>{{ game.time|time }}</td>
+                    </tr>
                 {% endfor %}
+                </tbody>
+                </table>
             </div>
         </div>
     </section>

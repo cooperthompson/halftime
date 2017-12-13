@@ -1,7 +1,8 @@
+import datetime
 from functools import partial
 from django import forms
 
-DateInput = partial(forms.DateInput, {'class': 'datepicker'})
+DateInput = partial(forms.DateInput, {'class': 'datepicker', 'value': datetime.date.today().strftime('%m/%d/%Y')})
 
 
 class DateRangeForm(forms.Form):

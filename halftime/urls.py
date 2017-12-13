@@ -21,6 +21,8 @@ from game_schedules.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 
+admin.site.site_header = settings.ADMIN_SITE_HEADER
+
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)

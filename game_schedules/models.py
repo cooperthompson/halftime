@@ -5,7 +5,7 @@ from game_schedules.managers import *
 # Create your models here.
 from datetime import date
 from django.db import models
-from urlparse import urlparse
+from urllib.parse import urlparse
 from django.contrib.auth.models import User, Group
 
 
@@ -17,7 +17,7 @@ class Organization(models.Model):
         managed = True
         db_table = 'soccer_organizations'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -31,10 +31,7 @@ class Field(models.Model):
         managed = True
         db_table = 'soccer_fields'
 
-    def __unicode__(self):
-        if self.name:
-            return self.name
-
+    def __str__(self):
         return str(self.number)
 
 
@@ -47,7 +44,7 @@ class Season(models.Model):
         managed = True
         db_table = 'soccer_seasons'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -59,12 +56,13 @@ class League(models.Model):
     key = models.CharField(max_length=100)
     is_active = models.BooleanField(default=False)
     logo = models.ImageField(null=True, blank=True)
+    breakaway_word_file = models.FileField(null=True)
 
     class Meta:
         managed = True
         db_table = 'soccer_leagues'
 
-    def __unicode__(self):
+    def __str__(self):
         return u"%s" % self.name
 
     def get_webcal_url(self, request):
@@ -93,7 +91,7 @@ class Team(models.Model):
         managed = True
         db_table = 'soccer_teams'
 
-    def __unicode__(self):
+    def __str__(self):
         return u"[%s] %s" % (self.number, self.name)
 
     def get_webcal_url(self, request):
@@ -142,7 +140,5 @@ class Game(models.Model):
         managed = True
         db_table = 'soccer_games'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
-
-
