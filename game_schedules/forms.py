@@ -1,8 +1,13 @@
 import datetime
 from functools import partial
+
+from dal import autocomplete
 from django import forms
 
-DateInput = partial(forms.DateInput, {'class': 'datepicker', 'value': datetime.date.today().strftime('%m/%d/%Y')})
+from game_schedules.models import Team
+
+DateInput = partial(forms.DateInput, {'class': 'datepicker form-control',
+                                      'value': datetime.date.today().strftime('%m/%d/%Y')})
 
 
 class DateRangeForm(forms.Form):
@@ -10,5 +15,14 @@ class DateRangeForm(forms.Form):
     end_date = forms.DateField(widget=DateInput())
 
 
-class GameDateForm(forms.Form):
+class GameForm(forms.Form):
     date = forms.DateField(widget=DateInput())
+    team = forms.ModelChoiceField(
+        queryset=Team.objects.all(),
+        widget=autocomplete.ModelSelect2(url='team-autocomplete',
+                                         attrs={
+                                             'class': 'form-control',
+                                             'data-minimum-input-length': 1,
+                                             'data-placeholder': 'Team'
+                                         })
+    )

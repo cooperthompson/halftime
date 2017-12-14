@@ -17,6 +17,8 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from api.views import *
 from django.contrib import admin
+
+from game_schedules.autocomplete import TeamAutocomplete
 from game_schedules.views import *
 from django.conf import settings
 from django.conf.urls.static import static
@@ -37,7 +39,8 @@ urlpatterns = [
     url(r'^$', home, name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^team-autocomplete/$', TeamAutocomplete.as_view(), name='team-autocomplete'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

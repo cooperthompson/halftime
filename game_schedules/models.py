@@ -56,7 +56,7 @@ class League(models.Model):
     key = models.CharField(max_length=100)
     is_active = models.BooleanField(default=False)
     logo = models.ImageField(null=True, blank=True)
-    breakaway_word_file = models.FileField(null=True)
+    breakaway_word_file = models.FileField(null=True, blank=True)
 
     class Meta:
         managed = True

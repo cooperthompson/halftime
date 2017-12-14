@@ -1,106 +1,143 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block extrastyle %}
+{% block extrahead %}
+    {{ form.media }}
     <link href="{% static 'css/halftime.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
     <body id="page-top" class="index">
-    <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
+
 
     <!-- Navigation -->
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <nav class="navbar navbar-expand-sm navbar-light static-top">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="#page-top">Madison Soccer</a>
-            </div>
+            <a class="navbar-brand" href="#">Madison Soccer</a>
+            <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#games">Games</a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="#games">Games</a>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#leagues">Leagues</a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="#leagues">Leagues</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#about">About</a>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#about">About</a>
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid -->
     </nav>
 
     <!-- Header -->
-    <header>
-        <div class="container" id="maincontent" tabindex="-1">
+    <header class="masthead text-white text-center">
+        <div class="overlay"></div>
+        <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <img class="img-responsive" src="{% static 'img/leagues/player.png' %}" alt="">
-                    <div class="intro-text">
-                        <h1 class="name">Madison Soccer</h1>
-                        <hr class="star-light">
-                        <span class="skills">Team Schedules - Roster Management</span>
-                    </div>
+                <div class="col-xl-9 mx-auto">
+                    <h1 class="mb-5">Madison Soccer</h1>
+                    <span class="skills">Team Schedules - Roster Management</span>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Organizations Grid -->
+    <section class="features-icons bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <h3>608 Elite</h3>
+                        <p class="lead mb-0">Making Soccer 1st Again!</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <h3>Breakaway</h3>
+                        <p class="lead mb-0">Playing the Game. Teaching the Game. Respecting the Game.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                        <h3>Keva</h3>
+                        <p class="lead mb-0">We're Your Place to Play!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <!-- Games Grid Section -->
-    <section id="games">
+    <section id="games" class="content-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Games</h2>
+                    <h2>{{ game_date_display }}</h2>
                     <hr class="star-primary">
                 </div>
             </div>
-            <div class="row">
-                <form action="" method="GET">
+            <form id="game_date_selector" action="#games" method="GET">
+                <div class="row">
+
                     {% csrf_token %}
-                    {{ form.date }}
-                    <input type="submit" class="btn btn-info" value="Go!">
-                </form>
-            </div>
-            <div class="row">
-                <table class="table table-bordered table-striped">
-                <thead>
-                <th>Field</th>
-                <th>Home Team</th>
-                <th>Away Team</th>
-                <th>Game Time</th>
-                </thead>
-                <tbody>
-                {% for game in games %}
-                    <tr>
-                        <td>{{ game.field }}</td>
-                        <td>{{ game.home_team }}</td>
-                        <td>{{ game.away_team }}</td>
-                        <td>{{ game.time|time }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-                </table>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            {{ form.date }}
+                            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            {{ form.team }}
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <div class="row mt-5">
+                {% if games %}
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Home Team</th>
+                            <th>Away Team</th>
+                            <th>Game Time</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for game in games %}
+                            <tr>
+                                <td>{{ game.field }}</td>
+                                <td>{{ game.home_team }}</td>
+                                <td>{{ game.away_team }}</td>
+                                <td>{{ game.time|time }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="col-md-6 mx-auto">
+                        <p class="lead">We didn't find any games scheduled on this day.</p>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </section>
 
 
     <!-- Leagues Grid Section -->
-    <section id="leagues">
+    <section id="leagues" class="content-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -110,27 +147,24 @@
             </div>
             <div class="row">
                 {% for league in leagues %}
-                <div class="col-sm-6 league-item">
-                    <a href="#leagueModal1" class="league-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>{{ league.name }}
-                            </div>
-                        </div>
-                        {% if league.logo %}
-                            <img src="{{ league.logo.url }}" class="img-responsive" alt="{{ league.name }}" title="{{ league.name }}">
-                        {% else %}
-                            <img src="{% static 'img/leagues/breakaway.png' %}" class="img-responsive" alt="{{ league.name }}" title="{{ league.name }}">
-                        {% endif %}
-                    </a>
-                </div>
+                    <div class="col-sm-6 league-item">
+                        <a href="#" class="league-link" data-toggle="modal">
+                            {% if league.logo %}
+                                <img src="{{ league.logo.url }}" class="img-fluid" alt="{{ league.name }}"
+                                     title="{{ league.name }}">
+                            {% else %}
+                                <img src="{{ league.logo.url }}" class="img-fluid" alt="{{ league.name }}"
+                                     title="{{ league.name }}">
+                            {% endif %}
+                        </a>
+                    </div>
                 {% endfor %}
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="success" id="about">
+    <section class="success content-section" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -140,8 +174,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <p>Halftime includes soccer schedules from several different Madison area leagues into one user-friendly
-                        online view, and can easily sync your team's games to your phone, Google Calendar, or other popular
+                    <p>Halftime includes soccer schedules from several different Madison area leagues into one
+                        user-friendly
+                        online view, and can easily sync your team's games to your phone, Google Calendar, or other
+                        popular
                         calendar applications.</p>
                 </div>
             </div>
@@ -153,34 +189,15 @@
         <div class="footer-above">
             <div class="container">
                 <div class="row">
-                    <div class="footer-col col-md-4">
+                    <div class="footer-col col-md-6">
                         <h3>Location</h3>
                         <p>Madison Wisconsin</p>
                     </div>
-                    <div class="footer-col col-md-4">
-                        <h3>Around the Web</h3>
-                        <ul class="list-inline">
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Google Plus</span><i class="fa fa-fw fa-google-plus"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Twitter</span><i class="fa fa-fw fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Linked In</span><i class="fa fa-fw fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Dribble</span><i class="fa fa-fw fa-dribbble"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-col col-md-4">
+                    <div class="footer-col col-md-6">
                         <h3>About Halftime</h3>
                         <p>Halftime is a hobby project created by <a
-                                href="https://www.facebook.com/coop.thompson">Cooper Thompson</a> to make managing my soccer life easier.</p>
+                                href="https://www.facebook.com/coop.thompson">Cooper Thompson</a> to make managing my
+                            soccer life easier.</p>
                     </div>
                 </div>
             </div>
@@ -203,4 +220,8 @@
         </a>
     </div>
     </body>
+{% endblock %}
+
+{% block extrascript %}
+    <script src="{% static 'js/halftime.js' %}"></script>
 {% endblock %}

@@ -1,7 +1,129 @@
 .fa-608:before {
-  content: "608";
+    content: "608";
 }
 
 .fa-breakaway:before {
-  content: "BA";
+    content: "BA";
+}
+
+header.masthead {
+    position: relative;
+    background: #343a40 url("../img/soccerball.jpeg") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+
+header.masthead .overlay {
+    position: absolute;
+    background-color: #212529;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+}
+
+header.masthead h1 {
+    font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+    header.masthead {
+        padding-top: 12rem;
+        padding-bottom: 12rem;
+    }
+
+    header.masthead h1 {
+        font-size: 3rem;
+    }
+}
+
+#mainNav {
+    font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: black;
+}
+
+#mainNav .navbar-toggler {
+    font-size: 14px;
+    padding: 11px;
+    color: white;
+    border: 1px solid white;
+}
+
+#mainNav .navbar-brand {
+    font-weight: 700;
+}
+
+#mainNav a {
+    color: white;
+}
+
+#mainNav .navbar-nav .nav-item {
+    -webkit-transition: background 0.3s ease-in-out;
+    -moz-transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out;
+}
+
+#mainNav .navbar-nav .nav-item:hover {
+    color: fade(white, 80%);
+    outline: none;
+    background-color: transparent;
+}
+
+#mainNav .navbar-nav .nav-item:active, #mainNav .navbar-nav .nav-item:focus {
+    outline: none;
+    background-color: transparent;
+}
+
+@media (min-width: 992px) {
+    #mainNav {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        -webkit-transition: background 0.3s ease-in-out, padding-top 0.3s ease-in-out, padding-bottom 0.3s;
+        -moz-transition: background 0.3s ease-in-out, padding-top 0.3s ease-in-out, padding-bottom 0.3s;
+        transition: background 0.3s ease-in-out, padding-top 0.3s ease-in-out, padding-bottom 0.3s;
+        letter-spacing: 1px;
+        border-bottom: none;
+        background: transparent;
+    }
+
+    #mainNav.navbar-shrink {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        background: black;
+    }
+
+    #mainNav .nav-link.active {
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    #mainNav .nav-link.active:hover {
+        color: white;
+    }
+}
+
+.select2-container .select2-selection--single .select2-selection__placeholder {
+    display: inline-block;
+}
+
+.select2-container .select2-selection--single,
+.select2-container .select2-selection--single .select2-selection__arrow,
+.select2-container .select2-selection--single .select2-selection__placeholder {
+    height: 38px;
+}
+
+@media (min-width: 992px) {
+    .content-section {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
 }

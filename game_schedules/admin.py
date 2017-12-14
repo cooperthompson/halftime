@@ -40,9 +40,12 @@ class LeagueAdmin(admin.ModelAdmin):
     autocomplete_fields = ['org']
 
     def save_model(self, request, obj, form, change):
-        if obj.breakaway_word_file:
-            loader = BreakawayLoader()
-            loader.import_file(obj, change)
+
+        if obj.breakaway_word_file and obj.pk is not None:
+            orig = League.objects.get(pk=obj.pk)
+            if orig.breakaway_word_file != obj.breakaway_word_file:
+                loader = BreakawayLoader()
+                loader.import_file(obj, change)
 
         super(LeagueAdmin, self).save_model(request, obj, form, change)
 
