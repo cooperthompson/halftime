@@ -43,7 +43,7 @@ class LeagueAdmin(admin.ModelAdmin):
 
         if obj.breakaway_word_file and obj.pk is not None:
             orig = League.objects.get(pk=obj.pk)
-            if orig.breakaway_word_file != obj.breakaway_word_file:
+            if True or orig.breakaway_word_file != obj.breakaway_word_file:
                 loader = BreakawayLoader()
                 loader.import_file(obj, change)
 

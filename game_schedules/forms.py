@@ -16,7 +16,7 @@ class DateRangeForm(forms.Form):
 
 
 class GameForm(forms.Form):
-    date = forms.DateField(widget=DateInput())
+    date = forms.DateField(widget=DateInput(), required=False)
     team = forms.ModelChoiceField(
         queryset=Team.objects.all(),
         widget=autocomplete.ModelSelect2(url='team-autocomplete',
@@ -24,5 +24,6 @@ class GameForm(forms.Form):
                                              'class': 'form-control',
                                              'data-minimum-input-length': 1,
                                              'data-placeholder': 'Team'
-                                         })
+                                         }),
+        required=False
     )

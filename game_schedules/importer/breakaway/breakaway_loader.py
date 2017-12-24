@@ -4,7 +4,6 @@ from datetime import datetime
 
 import pytz
 from django.conf import settings
-from unidecode import unidecode
 from game_schedules.models import *
 
 
@@ -25,6 +24,7 @@ class BreakawayLoader:
         return org
 
     def import_file(self, league, reimport):
+        self.logger.setLevel(logging.INFO)
         if reimport:
             # TODO:  delete existing games/teams for this league
             pass
@@ -58,8 +58,8 @@ class BreakawayLoader:
             matches = re.findall("(.*?)\((.*?)\)", team_name)
             for match in matches:
                 team_number = int(team_number)
-                team_name = unidecode(match[0].strip())
-                team_color = unidecode(match[1].strip())
+                team_name = match[0].strip()
+                team_color = match[1].strip()
                 slug = team_name.replace(" ", "-").lower()
 
                 try:

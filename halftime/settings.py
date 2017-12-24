@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'django_filters',
-    'crispy_forms',
     'game_schedules',
 ]
 

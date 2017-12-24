@@ -127,3 +127,26 @@ header.masthead h1 {
         padding-bottom: 100px;
     }
 }
+
+.game{
+	display: table;
+	width: 100%;
+}
+.game-teams, .game-team-colors {
+	display: table-row;
+}
+.game-cell {
+	display: table-cell;
+	padding: 3px 10px;
+    width: 50%;
+}
+.vs {
+    width: 40px;
+}
+.game-body {
+	display: table-row-group;
+}
+
+.game-team-colors hr {
+    height: 5px;
+}
