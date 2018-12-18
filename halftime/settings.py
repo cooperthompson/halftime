@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
+import logging
 import os
+import re
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,6 +28,10 @@ DEBUG = True
 INTERNAL_IPS = '127.0.0.1'
 ALLOWED_HOSTS = []
 
+# Breakaway Import Settings
+BREAKAWAY_START_TEAM_MARKER = "TEAM (COLOR)"
+BREAKAWAY_START_GAMES_MARKER = "WEEK 1"
+BREAKAWAY_GAME_RE = re.compile(r"(\d+)-(\d+)\s+(\d{1,2}:\d{2})([AaPp][Mm])(\d?)")
 
 # Application definition
 
@@ -98,7 +103,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'halftime',
         'USER': 'postgres',
-        'PASSWORD': 'ding,dong1',
+        'PASSWORD': 'ding,dong',
         'HOST': 'localhost',
         'PORT': '5432',
     },
@@ -129,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Chicago'
 
 USE_I18N = True
 
@@ -151,3 +156,23 @@ MEDIA_URL = '/media/'
 
 
 ADMIN_SITE_HEADER = "Halftime Soccer Schedules"
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': logging.INFO
+        },
+        'halftime': {
+            'handlers': ['console'],
+            'level': logging.DEBUG
+        }
+    },
+}

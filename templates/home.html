@@ -54,24 +54,14 @@
     <section class="features-icons bg-light text-center">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
+            {% for org in organizations %}
+                <div class="col-lg-6">
                     <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <h3>608 Elite</h3>
-                        <p class="lead mb-0">Making Soccer 1st Again!</p>
+                        <h3>{{ org.name }}</h3>
+                        <p class="lead mb-0">{{ org.motto }}</p>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <h3>Breakaway</h3>
-                        <p class="lead mb-0">Playing the Game. Teaching the Game. Respecting the Game.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                        <h3>Keva</h3>
-                        <p class="lead mb-0">We're Your Place to Play!</p>
-                    </div>
-                </div>
+            {% endfor %}
             </div>
         </div>
     </section>
@@ -152,9 +142,6 @@
                             {% if league.logo %}
                                 <img src="{{ league.logo.url }}" class="img-fluid" alt="{{ league.name }}"
                                      title="{{ league.name }}">
-                            {% else %}
-                                <img src="{{ league.logo.url }}" class="img-fluid" alt="{{ league.name }}"
-                                     title="{{ league.name }}">
                             {% endif %}
                         </a>
                     </div>
@@ -173,12 +160,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <p>Halftime includes soccer schedules from several different Madison area leagues into one
-                        user-friendly
-                        online view, and can easily sync your team's games to your phone, Google Calendar, or other
-                        popular
-                        calendar applications.</p>
+                <div class="col-lg-8 offset-lg-2">
+                    <p class="text-center">Halftime includes soccer schedules from Madison area leagues into a
+                        user-friendly online view, and can easily sync your team's games to your phone,
+                        Google Calendar, or other popular calendar applications.</p>
                 </div>
             </div>
         </div>
@@ -186,39 +171,17 @@
 
     <!-- Footer -->
     <footer class="text-center">
-        <div class="footer-above">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col col-md-6">
-                        <h3>Location</h3>
-                        <p>Madison Wisconsin</p>
-                    </div>
-                    <div class="footer-col col-md-6">
-                        <h3>About Halftime</h3>
-                        <p>Halftime is a hobby project created by <a
-                                href="https://www.facebook.com/coop.thompson">Cooper Thompson</a> to make managing my
-                            soccer life easier.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="footer-below">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12">
-                        Copyright &copy; Cooper Thompson 2017
+                    <div class="col-lg-12 pb-4">
+                        <hr class="star-light">
+                        Copyright &copy; Cooper Thompson 2018
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
-    </div>
     </body>
 {% endblock %}
 

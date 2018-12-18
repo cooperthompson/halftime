@@ -12,6 +12,8 @@ from django.contrib.auth.models import User, Group
 class Organization(models.Model):
     name = models.CharField(max_length=100)
     short_name = models.CharField(max_length=4, null=True, blank=True)
+    motto = models.CharField(max_length=100, null=True, blank=True)
+    order = models.IntegerField(default=10)
 
     class Meta:
         managed = True
@@ -25,7 +27,7 @@ class Field(models.Model):
     name = models.CharField(max_length=50)
     short_name = models.CharField(max_length=10)
     number = models.IntegerField(null=1, blank=1)
-    organization = models.ForeignKey(Organization, null=True, blank=True)
+    organization = models.ForeignKey(Organization, null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
         managed = True
@@ -38,7 +40,7 @@ class Field(models.Model):
 class Season(models.Model):
     name = models.CharField(max_length=100)
     iscurrent = models.BooleanField(default=False)
-    organization = models.ForeignKey(Organization, null=True)
+    organization = models.ForeignKey(Organization, null=True, on_delete=models.CASCADE)
 
     class Meta:
         managed = True
@@ -51,12 +53,13 @@ class Season(models.Model):
 class League(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField()
-    season = models.ForeignKey(Season, related_name='leagues', null=True, blank=True)
-    org = models.ForeignKey(Organization, related_name='org', null=True, blank=True)
+    season = models.ForeignKey(Season, related_name='leagues', null=True, blank=True, on_delete=models.CASCADE)
+    org = models.ForeignKey(Organization, related_name='org', null=True, blank=True, on_delete=models.CASCADE)
     key = models.CharField(max_length=100)
     is_active = models.BooleanField(default=False)
     logo = models.ImageField(null=True, blank=True)
     breakaway_word_file = models.FileField(null=True, blank=True)
+    breakaway_import_file = models.FileField(null=True, blank=True)
 
     class Meta:
         managed = True
@@ -82,8 +85,8 @@ class Team(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField()
     color = models.CharField(max_length=100)
-    league = models.ForeignKey(League, related_name='teams')
-    manager = models.ForeignKey(User, blank=True, null=True, related_name='manager')
+    league = models.ForeignKey(League, related_name='teams', on_delete=models.CASCADE)
+    manager = models.ForeignKey(User, blank=True, null=True, related_name='manager', on_delete=models.CASCADE)
     roster = models.ManyToManyField(User, related_name='player')
 
     class Meta:
@@ -109,7 +112,7 @@ class Game(models.Model):
     # store game "name" to avoid having to do extra database hits on the teams
     # many-to-many field when constructing the name.
     name = models.CharField(max_length=100)  # Example name:  "Stormtroopers vs. Whistlers"
-    league = models.ForeignKey(League)
+    league = models.ForeignKey(League, on_delete=models.CASCADE)
     home_team = ChainedForeignKey(Team,
                                   chained_field='league',
                                   chained_model_field='league',
@@ -119,7 +122,7 @@ class Game(models.Model):
                                   chained_model_field='league',
                                   related_name='away_team')
     time = models.DateTimeField()
-    field = models.ForeignKey(Field, null=True, blank=True)
+    field = models.ForeignKey(Field, null=True, blank=True, on_delete=models.CASCADE)
 
     @property
     def is_today(self):

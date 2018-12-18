@@ -23,29 +23,28 @@ class TeamInline(admin.TabularInline):
 
 
 class OrganizationAdmin(admin.ModelAdmin):
-    fields = ['name', 'short_name']
-    list_display = ['name', 'short_name']
+    fields = ['name', 'short_name', 'motto', 'order']
+    list_display = ['name', 'short_name', 'motto']
     list_filter = ['name', ]
     search_fields = ['name']
 
 
 class LeagueAdmin(admin.ModelAdmin):
     inlines = [TeamInline]
-    fields = ['name', 'is_active', 'org', 'logo', 'breakaway_word_file']
+    fields = ['name', 'is_active', 'org', 'logo', 'breakaway_import_file']
     # readonly_fields = ['key']
-    list_display = ['__str__', 'key', 'name', 'is_active', 'logo', 'breakaway_word_file']
+    list_display = ['__str__', 'key', 'name', 'is_active', 'logo', 'breakaway_import_file']
     search_fields = ['name']
     list_filter = ['is_active']
-    list_editable = ['key', 'name', 'is_active', 'logo', 'breakaway_word_file']
+    list_editable = ['key', 'name', 'is_active', 'logo', 'breakaway_import_file']
     autocomplete_fields = ['org']
 
     def save_model(self, request, obj, form, change):
-
-        if obj.breakaway_word_file and obj.pk is not None:
+        if obj.breakaway_import_file and obj.pk is not None:
             orig = League.objects.get(pk=obj.pk)
-            if orig.breakaway_word_file != obj.breakaway_word_file:
-                loader = BreakawayLoader()
-                loader.import_file(obj, change)
+            if orig.breakaway_import_file != obj.breakaway_import_file:
+                loader = BreakawayLoader(obj)
+                loader.import_text_file(change)
 
         super(LeagueAdmin, self).save_model(request, obj, form, change)
 
@@ -65,6 +64,10 @@ class GameAdmin(admin.ModelAdmin):
     list_display_links = ['__str__']
     list_filter = ['league']
     search_fields = ['home_team__name', 'away_team__name']
+
+
+admin.site.site_header = 'Halftime administration'
+admin.site.site_title = 'Halftime administration'
 
 
 admin.site.register(Organization, OrganizationAdmin)
