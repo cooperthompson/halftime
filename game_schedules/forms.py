@@ -25,5 +25,6 @@ class GameForm(forms.Form):
                                              'class': 'form-control',
                                              'data-minimum-input-length': 1,
                                              'data-placeholder': 'Team'
-                                         })
+                                         }),
+        required=False
     )

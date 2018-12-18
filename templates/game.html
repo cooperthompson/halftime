@@ -1,0 +1,18 @@
+<div class="card card-block">
+    <div class="game">
+        <div class="game-body">
+            <div class="game-teams card-title">
+                <div class="game-cell">{{ game.home_team }}</div>
+                <div class="game-cell vs">vs.</div>
+                <div class="game-cell">{{ game.away_team }}</div>
+            </div>
+            <div class="game-team-colors card-text">
+                <div class="game-cell"><hr style="background-color: {{ game.home_team.color }}"></div>
+                <div class="game-cell vs"></div>
+                <div class="game-cell"><hr style="background-color: {{ game.away_team.color }}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

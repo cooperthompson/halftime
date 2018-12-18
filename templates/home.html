@@ -96,26 +96,11 @@
             </form>
             <div class="row mt-5">
                 {% if games %}
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>Field</th>
-                            <th>Home Team</th>
-                            <th>Away Team</th>
-                            <th>Game Time</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for game in games %}
-                            <tr>
-                                <td>{{ game.field }}</td>
-                                <td>{{ game.home_team }}</td>
-                                <td>{{ game.away_team }}</td>
-                                <td>{{ game.time|time }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                    {% for game in games %}
+                    <div class="col-md-6">
+                        {% include 'game.html' %}
+                    </div>
+                    {% endfor %}
                 {% else %}
                     <div class="col-md-6 mx-auto">
                         <p class="lead">We didn't find any games scheduled on this day.</p>
