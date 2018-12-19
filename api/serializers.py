@@ -51,10 +51,11 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class GameSerializer(serializers.HyperlinkedModelSerializer):
-    teams = TeamSerializer(many=True, read_only=True)
+    home_team = TeamSerializer(read_only=True)
+    away_team = TeamSerializer(read_only=True)
     field = serializers.StringRelatedField()
     league = serializers.StringRelatedField()
 
     class Meta:
         model = Game
-        fields = '__all__'
+        fields = ('id', 'field', 'league', 'name', 'time', 'home_team', 'away_team')

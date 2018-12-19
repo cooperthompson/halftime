@@ -1,115 +1,33 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block extrahead %}
-    {{ form.media }}
-    <link href="{% static 'css/halftime.css' %}" rel="stylesheet">
+{% block masthead_title %}
+    Madison Soccer
+{% endblock %}
+{% block masthead_subtitle %}
+    Online Team Schedules for Breakway Sports
 {% endblock %}
 
 {% block content %}
-    <body id="page-top" class="index">
-
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-sm navbar-light static-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Madison Soccer</a>
-            <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#games">Games</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#leagues">Leagues</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#about">About</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Header -->
-    <header class="masthead text-white text-center">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-9 mx-auto">
-                    <h1 class="mb-5">Madison Soccer</h1>
-                    <span class="skills">Team Schedules - Roster Management</span>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Organizations Grid -->
-    <section class="features-icons bg-light text-center">
-        <div class="container">
-            <div class="row">
-            {% for org in organizations %}
-                <div class="col-lg-6">
-                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <h3>{{ org.name }}</h3>
-                        <p class="lead mb-0">{{ org.motto }}</p>
-                    </div>
-                </div>
-            {% endfor %}
-            </div>
-        </div>
-    </section>
-
-
     <!-- Games Grid Section -->
-    <section id="games" class="content-section">
+    <section class="content-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>{{ game_date_display }}</h2>
-                    <hr class="star-primary">
+                <div class="col-lg-6">
+                    <div class="datepicker"></div>
                 </div>
-            </div>
-            <form id="game_date_selector" action="#games" method="GET">
-                <div class="row">
-
-                    {% csrf_token %}
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            {{ form.date }}
-                            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                        </div>
+                <div class="col-lg-6">
+                    <div id="games">
+                        {% for game in games %}
+                            {{ game }}
+                        {% empty %}
+                            <p class="lead">No games today.  :(</p>
+                        {% endfor %}
                     </div>
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            {{ form.team }}
-                        </div>
-                    </div>
-
                 </div>
-            </form>
-            <div class="row mt-5">
-                {% if games %}
-                    {% for game in games %}
-                    <div class="col-md-6">
-                        {% include 'game.html' %}
-                    </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="col-md-6 mx-auto">
-                        <p class="lead">We didn't find any games scheduled on this day.</p>
-                    </div>
-                {% endif %}
             </div>
         </div>
     </section>
-
 
     <!-- Leagues Grid Section -->
     <section id="leagues" class="content-section">
@@ -123,10 +41,12 @@
             <div class="row">
                 {% for league in leagues %}
                     <div class="col-sm-6 league-item">
-                        <a href="#" class="league-link" data-toggle="modal">
+                        <a href="{% url 'league' %}?id={{ league.id }}" class="league-link">
                             {% if league.logo %}
                                 <img src="{{ league.logo.url }}" class="img-fluid" alt="{{ league.name }}"
                                      title="{{ league.name }}">
+                            {% else %}
+                                {{ league.name }}
                             {% endif %}
                         </a>
                     </div>
@@ -146,30 +66,29 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
-                    <p class="text-center">Halftime includes soccer schedules from Madison area leagues into a
-                        user-friendly online view, and can easily sync your team's games to your phone,
-                        Google Calendar, or other popular calendar applications.</p>
+                    <p class="text-center">Halftime includes online soccer schedules from Madison area leagues
+                        in a online format. You can sync your team's schedule to your phone,
+                        Google Calendar, or other popular calendar application.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="text-center">
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 pb-4">
-                        <hr class="star-light">
-                        Copyright &copy; Cooper Thompson 2018
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    </body>
 {% endblock %}
 
 {% block extrascript %}
-    <script src="{% static 'js/halftime.js' %}"></script>
+    <script src="{% static 'js/halftime-datepicker.js' %}"></script>
+
+    {% verbatim %}
+    <script id="game-list-template" type="text/x-handlebars-template">
+        <div class="games">
+            {{ count }} games on this day.
+                {{#each results}}
+                <p>
+                    {{ home_team.name }} vs. {{ away_team.name }} at {{ time }}
+                </p>
+                {{/each}}
+        </div>
+    </script>
+    {% endverbatim %}
 {% endblock %}

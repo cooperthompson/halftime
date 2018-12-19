@@ -26,7 +26,7 @@ SECRET_KEY = '9*_^e4g2!0lyh^qznl1bvveqhtg@=1ool!@3_84)s2u6@yb$yx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 INTERNAL_IPS = '127.0.0.1'
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Breakaway Import Settings
 BREAKAWAY_START_TEAM_MARKER = "TEAM (COLOR)"

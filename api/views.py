@@ -1,5 +1,5 @@
-from rest_framework import viewsets, filters
-from django_filters.rest_framework import DjangoFilterBackend
+from django_filters import rest_framework as filters
+from rest_framework import viewsets
 from api.serializers import *
 from game_schedules.models import *
 
@@ -39,11 +39,18 @@ class TeamViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TeamSerializer
 
 
+class GameDateFilter(filters.FilterSet):
+    time = filters.DateTimeFilter(lookup_expr="date")
+
+    class Meta:
+        model = Game
+        fields = ['time']
+
+
 class GameViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
-    filter_backends = (filters.SearchFilter, DjangoFilterBackend)
     search_fields = ('name', 'time', 'field__name', 'league__name')
-    filter_fields = ('name', 'time', 'field__name', 'league__name')
+    filter_class = GameDateFilter
 
 

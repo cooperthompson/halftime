@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block masthead_title %}
+    404 - Not Found
+{% endblock %}
+{% block masthead_subtitle %}
+    {{ exception }}
+{% endblock %}
+
+
+{% block content %}
+    <!-- Games Grid Section -->
+    <section id="games" class="content-section">
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-md-6 mx-auto">
+                    <p class="lead">{{ exception }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

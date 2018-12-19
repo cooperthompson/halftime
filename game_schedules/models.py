@@ -26,7 +26,7 @@ class Organization(models.Model):
 class Field(models.Model):
     name = models.CharField(max_length=50)
     short_name = models.CharField(max_length=10)
-    number = models.IntegerField(null=1, blank=1)
+    identifier = models.CharField(max_length=1, default='1')
     organization = models.ForeignKey(Organization, null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
@@ -34,7 +34,7 @@ class Field(models.Model):
         db_table = 'soccer_fields'
 
     def __str__(self):
-        return str(self.number)
+        return str(self.identifier)
 
 
 class Season(models.Model):
@@ -55,7 +55,6 @@ class League(models.Model):
     slug = models.SlugField()
     season = models.ForeignKey(Season, related_name='leagues', null=True, blank=True, on_delete=models.CASCADE)
     org = models.ForeignKey(Organization, related_name='org', null=True, blank=True, on_delete=models.CASCADE)
-    key = models.CharField(max_length=100)
     is_active = models.BooleanField(default=False)
     logo = models.ImageField(null=True, blank=True)
     breakaway_word_file = models.FileField(null=True, blank=True)
@@ -88,6 +87,11 @@ class Team(models.Model):
     league = models.ForeignKey(League, related_name='teams', on_delete=models.CASCADE)
     manager = models.ForeignKey(User, blank=True, null=True, related_name='manager', on_delete=models.CASCADE)
     roster = models.ManyToManyField(User, related_name='player')
+
+    def games(self):
+        home_games = Game.objects.filter(home_team=self)
+        away_games = Game.objects.filter(away_team=self)
+        return away_games | home_games
 
     class Meta:
         ordering = ['number']

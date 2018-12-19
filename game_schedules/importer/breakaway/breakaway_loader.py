@@ -67,9 +67,10 @@ class BreakawayLoader:
                 match = re.match(r"\w+\.\s?(\w+)\.?\s+?(\d+)", line)
                 if parse_state == "games" and match:
                     game_date = self.parse_game_date(match, line)
+                    self.logger.info("Processing games on {}".format(game_date.strftime('%a %b %d')))
 
                 # regex check for the game row (e.g. 19-20 7:002)
-                match = re.match(r"(\d+)-(\d+)\s+(\d{1,2}):(\d{2})([AaPp]?[Mm]?)(\d?)", line.strip())
+                match = re.match(r"(\d+)-(\d+)\s+(\d{1,2}):(\d{2})\s*([AaPp]?[Mm]?)(\w?)", line.strip())
                 if parse_state == "games" and match:
                     # Combine the date header (e.g. Mo.Feb 3) with the game time (e.g. 7:002) into a datetime
                     game_datetime = self.parse_game_time(match, game_date)
@@ -105,7 +106,7 @@ class BreakawayLoader:
     def save_game(self, match, game_datetime):
         home_team = self.get_team(match.group(1), self.league)
         away_team = self.get_team(match.group(2), self.league)
-        game_field = self.parse_game_field(match.group(3))
+        game_field = self.parse_game_field(match.group(6))
 
         game_name = '{} vs. {} at {}'.format(home_team, away_team, game_field.name)
 
@@ -117,12 +118,11 @@ class BreakawayLoader:
         game.away_team = away_team
 
         try:
-
             game.save()
         except Exception as e:
             self.logger.error("Error saving game: {}\n{}".format(game, e))
         finally:
-            self.logger.info("Created game {}".format(game))
+            self.logger.info("\tCreated game {}".format(game))
 
     def get_team(self, team_number, league):
         team = None
@@ -139,20 +139,16 @@ class BreakawayLoader:
             field_number = 1
 
         try:
-            field_number = int(field_number)
-        except ValueError:
-            self.logger.error("Field number is messed up: {}".format(field_number))
-            return None
-
-        try:
-            field = Field.objects.filter(organization=self.organization).get(number=field_number)
+            field = Field.objects.filter(organization=self.organization).get(identifier=field_number)
         except Field.DoesNotExist:
             field = Field(organization=self.organization,
-                          number=field_number,
+                          identifier=field_number,
                           name="{} Field {}".format(self.organization, field_number),
                           short_name="{}-F{}".format(self.organization.short_name, field_number)
                           )
             field.save()
+        except Field.MultipleObjectsReturned:
+            field = Field.objects.filter(organization=self.organization).filter(identifier=field_number)[0]
 
         return field
 
@@ -197,6 +193,8 @@ class BreakawayLoader:
         # Assume the game is in the evening, unless it is explicitly indicated to be morning
         if game_am != "AM":
             game_hr = game_hr + 12
+        if game_hr == 24:
+            game_hr = 0
 
         central_tz = pytz.timezone('America/Chicago')
         # game_datetime = datetime(game_date.year, game_date.month, game_date.day, game_hr, game_mn, tzinfo=central_tz)

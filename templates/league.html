@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block masthead_title %}
+    {{ league.name }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'league' %}?id={{ league.id }}">{{ league }}</a></li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <!-- Teams Grid Section -->
+    <section id="teams" class="content-section">
+        <div class="container">
+            <div class="row mt-5">
+                {% for team in teams %}
+                <div class="col-md-6">
+                    <a href="{% url 'team' %}?id={{ team.id }}">{{ team }}</a>
+                </div>
+                {% empty %}
+                    <div class="col-md-6 mx-auto">
+                        <p class="lead">Something may have gone wrong.  We didn't find any teams in this league.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

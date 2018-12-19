@@ -121,6 +121,12 @@ header.masthead h1 {
     height: 38px;
 }
 
+
+.content-section {
+        padding-top: 20px;
+        padding-bottom: 20px;
+}
+
 @media (min-width: 992px) {
     .content-section {
         padding-top: 50px;

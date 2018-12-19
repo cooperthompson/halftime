@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block masthead_title %}
+    {{ team.name }}
+{% endblock %}
+{% block masthead_subtitle %}
+    Proudly sporting <u>{{ team.color|lower }}</u> jerseys.
+{% endblock %}
+
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'league' %}?id={{ team.league.id }}">{{ team.league }}</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'team' %}?id={{ team.id }}">{{ team }}</a></li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <!-- Games Grid Section -->
+    <section id="games" class="content-section">
+        <div class="container">
+            <div class="row mt-5">
+                {% if games %}
+                    {% for game in games %}
+                        <div class="col-md-6">
+                            {% include 'game.html' %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-md-6 mx-auto">
+                        <p class="lead">We didn't find any games scheduled on this day.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

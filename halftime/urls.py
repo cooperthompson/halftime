@@ -19,7 +19,9 @@ from api.views import *
 from django.contrib import admin
 
 from game_schedules.autocomplete import TeamAutocomplete
-from game_schedules.views import *
+import game_schedules.views as game_schedule_views
+import webcal.views as webcal_views
+
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -36,11 +38,14 @@ router.register(r'teams', TeamViewSet)
 router.register(r'games', GameViewSet)
 
 urlpatterns = [
-    url(r'^$', home, name='home'),
+    url(r'^$', game_schedule_views.home_view, name='home'),
+    url(r'^team/$', game_schedule_views.team_view, name='team'),
+    url(r'^league/$', game_schedule_views.league_view, name='league'),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^team-autocomplete/$', TeamAutocomplete.as_view(), name='team-autocomplete'),
+    url(r'^webcal/', webcal_views.ics)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

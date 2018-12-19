@@ -32,21 +32,26 @@ class OrganizationAdmin(admin.ModelAdmin):
 class LeagueAdmin(admin.ModelAdmin):
     inlines = [TeamInline]
     fields = ['name', 'is_active', 'org', 'logo', 'breakaway_import_file']
-    # readonly_fields = ['key']
-    list_display = ['__str__', 'key', 'name', 'is_active', 'logo', 'breakaway_import_file']
+    list_display = ['__str__', 'name', 'is_active', 'breakaway_import_file', 'logo']
     search_fields = ['name']
     list_filter = ['is_active']
-    list_editable = ['key', 'name', 'is_active', 'logo', 'breakaway_import_file']
+    list_editable = ['name', 'is_active', 'breakaway_import_file', 'logo']
     autocomplete_fields = ['org']
 
     def save_model(self, request, obj, form, change):
-        if obj.breakaway_import_file and obj.pk is not None:
-            orig = League.objects.get(pk=obj.pk)
-            if orig.breakaway_import_file != obj.breakaway_import_file:
+        super(LeagueAdmin, self).save_model(request, obj, form, change)
+        if obj.breakaway_import_file:
+
+            if not change:
+                # New league being created - import teams and games from file
                 loader = BreakawayLoader(obj)
                 loader.import_text_file(change)
-
-        super(LeagueAdmin, self).save_model(request, obj, form, change)
+            else:
+                # Existing league is being edited, only import teams and teames if the import file was changed.
+                orig = League.objects.get(pk=obj.pk)
+                if orig.breakaway_import_file != obj.breakaway_import_file:
+                    loader = BreakawayLoader(obj)
+                    loader.import_text_file(change)
 
 
 class TeamAdmin(admin.ModelAdmin):
