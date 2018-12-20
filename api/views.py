@@ -58,20 +58,28 @@ class GameViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 def team_events(request):
-    team_id = request.GET.get('id')
+    team_id = request.GET.get('team_id')
+    start = request.GET.get('start')
+    end = request.GET.get('end')
 
     try:
         team = Team.objects.get(id=team_id)
+        games = team.games()
     except Team.DoesNotExist:
-        raise Http404("Oops!  We couldn't find the team you were looking for.")
+        games = Game.objects.all()
 
-    games = team.games()
+    if start:
+        games = games.filter(time__date__gte=start)
+    if end:
+        games = games.filter(time__date__lt=end)
     events = []
     for game in games:
+        start_time = game.time
+        end_time = game.time + timedelta(hours=1)
         event = {
             'title': game.name,
-            'start': game.time,
-            'end': game.time + + timedelta(hours=1)
+            'start': start_time.isoformat(),
+            'end': end_time.isoformat()
         }
         events.append(event)
 

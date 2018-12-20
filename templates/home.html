@@ -10,17 +10,20 @@
 
 {% block content %}
     <!-- Games Grid Section -->
-    <section class="content-section">
+    <section id="games" class="content-section">
         <div class="container">
             <div class="row">
-                <div id="calendar"></div>
+                <div class="col-12">
+                    <div id="calendar"></div>
+                </div>
             </div>
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="datepicker"></div>
-                </div>
-                <div class="col-lg-8">
-                    <div id="games"></div>
+                <div class="col-12">
+                    <ul>
+                    {% for game in games %}
+                        <li>{{ game }} - {{ game.time }}</li>
+                    {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
@@ -40,7 +43,8 @@
                     <span class="mdl-list__item mdl-list__item--two-line col-md-6">
                         <span class="mdl-list__item-primary-content">
                             {% if league.logo %}
-                                <img src="{{ league.logo.url }}" class="img-fluid" alt="{{ league.name }}" title="{{ league.name }}">
+                                <img src="{{ league.logo.url }}" class="img-fluid" alt="{{ league.name }}"
+                                     title="{{ league.name }}">
                             {% endif %}
                             <span><a href="{% url 'league' %}?id={{ league.id }}">{{ league }}</a></span>
                             <span class="mdl-list__item-sub-title">{{ league.teams.count }} Teams</span>
@@ -73,7 +77,26 @@
 {% endblock %}
 
 {% block extrascript %}
-    <script src="{% static 'js/halftime-datepicker.js' %}"></script>
-    {% include "handlebars/game.hbs" %}
-
+    <script type="application/javascript">
+        $(function () {
+            $('#calendar').fullCalendar({
+                defaultView: 'seasonView',
+                header: {
+                    left: '',
+                    center: '',
+                    right: 'today prev,next'
+                },
+                buttonText: {
+                    today: "Today"
+                },
+                views: {
+                    seasonView: {
+                        type: 'list',
+                        listDayFormat: 'dddd',
+                        listDayAltFormat: 'LL'
+                    }
+                }
+            }).fullCalendar('addEventSource', '/api/events/');
+        });
+    </script>
 {% endblock %}

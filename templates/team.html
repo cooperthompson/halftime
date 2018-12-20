@@ -22,7 +22,7 @@
     <script src="{% static 'js/halftime-team-calendar.js' %}"></script>
     <script type="application/javascript">
         $(function () {
-            $('#calendar').fullCalendar('addEventSource', '/api/events/?id={{ team.id }}');
+            $('#calendar').fullCalendar('addEventSource', '/api/events/?team_id={{ team.id }}');
         });
     </script>
 {% endblock %}
