@@ -1,0 +1,38 @@
+{% verbatim %}
+<template id="game-list-template">
+    <div class="games">
+        <ul class="mdl-list">
+            {{#each results}}
+                <li class="mdl-list__item-primary-content">
+                    <div class="game">
+                        <div class="game-time">
+                            {{formatDate time 'LT'}}
+                        </div>
+                        <div class="game-home-team">
+                            <a href="/team/?id={{home_team.id}}">
+                            <span class="mdl-chip mdl-chip--contact">
+                                <span class="team-color mdl-chip__action">
+                                    <i style="color: {{ home_team.color }}" class="material-icons">lens</i>
+                                </span>
+                                <span class="mdl-chip__text">{{home_team.name}}</span>
+                            </span>
+                            </a>
+                        </div>
+                        <div class="game-vs">vs.</div>
+                        <div class="game-away-team">
+                            <a href="/team/?id={{away_team.id}}">
+                            <span class="mdl-chip mdl-chip--contact mdl-chip--full-width mdl-chip-deletable">
+                                <span class="team-color mdl-chip__action">
+                                    <i style="color: {{ away_team.color }}" class="material-icons">lens</i>
+                                </span>
+                                <span class="mdl-chip__text">{{away_team.name}}</span>
+                            </span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</template>
+{% endverbatim %}

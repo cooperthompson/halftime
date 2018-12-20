@@ -1,3 +1,6 @@
+from datetime import timedelta
+
+from django.http import Http404, JsonResponse
 from django_filters import rest_framework as filters
 from rest_framework import viewsets
 from api.serializers import *
@@ -54,3 +57,22 @@ class GameViewSet(viewsets.ReadOnlyModelViewSet):
     filter_class = GameDateFilter
 
 
+def team_events(request):
+    team_id = request.GET.get('id')
+
+    try:
+        team = Team.objects.get(id=team_id)
+    except Team.DoesNotExist:
+        raise Http404("Oops!  We couldn't find the team you were looking for.")
+
+    games = team.games()
+    events = []
+    for game in games:
+        event = {
+            'title': game.name,
+            'start': game.time,
+            'end': game.time + + timedelta(hours=1)
+        }
+        events.append(event)
+
+    return JsonResponse(events, safe=False)

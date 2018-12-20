@@ -13,17 +13,14 @@
     <section class="content-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
+                <div id="calendar"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
                     <div class="datepicker"></div>
                 </div>
-                <div class="col-lg-6">
-                    <div id="games">
-                        {% for game in games %}
-                            {{ game }}
-                        {% empty %}
-                            <p class="lead">No games today.  :(</p>
-                        {% endfor %}
-                    </div>
+                <div class="col-lg-8">
+                    <div id="games"></div>
                 </div>
             </div>
         </div>
@@ -40,16 +37,15 @@
             </div>
             <div class="row">
                 {% for league in leagues %}
-                    <div class="col-sm-6 league-item">
-                        <a href="{% url 'league' %}?id={{ league.id }}" class="league-link">
+                    <span class="mdl-list__item mdl-list__item--two-line col-md-6">
+                        <span class="mdl-list__item-primary-content">
                             {% if league.logo %}
-                                <img src="{{ league.logo.url }}" class="img-fluid" alt="{{ league.name }}"
-                                     title="{{ league.name }}">
-                            {% else %}
-                                {{ league.name }}
+                                <img src="{{ league.logo.url }}" class="img-fluid" alt="{{ league.name }}" title="{{ league.name }}">
                             {% endif %}
-                        </a>
-                    </div>
+                            <span><a href="{% url 'league' %}?id={{ league.id }}">{{ league }}</a></span>
+                            <span class="mdl-list__item-sub-title">{{ league.teams.count }} Teams</span>
+                        </span>
+                    </span>
                 {% endfor %}
             </div>
         </div>
@@ -78,17 +74,6 @@
 
 {% block extrascript %}
     <script src="{% static 'js/halftime-datepicker.js' %}"></script>
+    {% include "handlebars/game.hbs" %}
 
-    {% verbatim %}
-    <script id="game-list-template" type="text/x-handlebars-template">
-        <div class="games">
-            {{ count }} games on this day.
-                {{#each results}}
-                <p>
-                    {{ home_team.name }} vs. {{ away_team.name }} at {{ time }}
-                </p>
-                {{/each}}
-        </div>
-    </script>
-    {% endverbatim %}
 {% endblock %}

@@ -44,6 +44,7 @@ class LeagueSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class TeamSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.IntegerField()
 
     class Meta:
         model = Team

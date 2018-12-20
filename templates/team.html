@@ -18,23 +18,25 @@
     </nav>
 {% endblock %}
 
+{% block extrascript %}
+    <script src="{% static 'js/halftime-team-calendar.js' %}"></script>
+    <script type="application/javascript">
+        $(function () {
+            $('#calendar').fullCalendar('addEventSource', '/api/events/?id={{ team.id }}');
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
     <!-- Games Grid Section -->
     <section id="games" class="content-section">
         <div class="container">
-            <div class="row mt-5">
-                {% if games %}
-                    {% for game in games %}
-                        <div class="col-md-6">
-                            {% include 'game.html' %}
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="col-md-6 mx-auto">
-                        <p class="lead">We didn't find any games scheduled on this day.</p>
-                    </div>
-                {% endif %}
+            <div class="row">
+                <div class="col-12">
+                    <div id="calendar"></div>
+                </div>
             </div>
         </div>
     </section>
 {% endblock %}
+

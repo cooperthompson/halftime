@@ -156,3 +156,34 @@ header.masthead h1 {
 .game-team-colors hr {
     height: 5px;
 }
+
+.game {
+    display: grid;
+    grid-template-columns: 4fr 10fr 1fr 10fr;
+    grid-template-rows: auto;
+    grid-template-areas: "game-time home-team vs away-team";
+    align-items: center;
+}
+.game-time {
+    grid-area: game-time
+}
+.game-home-team {
+  grid-area: home-team;
+}
+.game-away-team {
+  grid-area: away-team;
+}
+.game-vs {
+  grid-area: vs;
+}
+
+.game .mdl-chip {
+    width: 90%;
+    background-color: #F5F5F5;
+}
+.team-color {
+    margin-right: 10px;
+}
+.leagues {
+    width: 100%;
+}

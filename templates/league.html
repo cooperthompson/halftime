@@ -20,13 +20,12 @@
         <div class="container">
             <div class="row mt-5">
                 {% for team in teams %}
-                <div class="col-md-6">
-                    <a href="{% url 'team' %}?id={{ team.id }}">{{ team }}</a>
-                </div>
-                {% empty %}
-                    <div class="col-md-6 mx-auto">
-                        <p class="lead">Something may have gone wrong.  We didn't find any teams in this league.</p>
-                    </div>
+                    <span class="mdl-list__item mdl-list__item--two-line col-md-6">
+                        <span class="mdl-list__item-primary-content">
+                            <span><a href="{% url 'team' %}?id={{ team.id }}">{{ team }}</a></span>
+                            <span class="mdl-list__item-sub-title">{{ team.games.count }} Games</span>
+                        </span>
+                    </span>
                 {% endfor %}
             </div>
         </div>

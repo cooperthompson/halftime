@@ -5,7 +5,7 @@ import datetime
 
 
 def home_view(request):
-    games = Game.objects.filter(time__date=datetime.datetime.now())[:10]
+    # games = Game.objects.filter(time__date=datetime.datetime.now())[:10]
 
     leagues = League.objects.all().order_by('org')
 
@@ -13,7 +13,7 @@ def home_view(request):
     context = {
         'organizations': Organization.objects.all().order_by('order'),
         'leagues': leagues,
-        'games': games,
+        # 'games': games,
     }
     return HttpResponse(template.render(context, request=request))
 
