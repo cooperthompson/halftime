@@ -50,9 +50,20 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'game_schedules',
+    'django_s3_storage',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+YOUR_S3_BUCKET = "halftime-static"
+
+STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+AWS_S3_BUCKET_NAME_STATIC = YOUR_S3_BUCKET
+
+# These next two lines will serve the static files directly
+# from the s3 bucket
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % YOUR_S3_BUCKET
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -103,9 +114,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'halftime',
-        'USER': 'postgres',
+        'USER': 'halftime',
         'PASSWORD': 'ding,dong',
-        'HOST': 'localhost',
+        'HOST': 'halftime.czbmltokpjbw.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
     },
 }
