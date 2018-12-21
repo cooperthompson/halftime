@@ -14,14 +14,16 @@ import os
 import re
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from halftime import secrets
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-YEAR_CUTOVER = False
+YEAR_CUTOVER = True
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9*_^e4g2!0lyh^qznl1bvveqhtg@=1ool!@3_84)s2u6@yb$yx'
+SECRET_KEY = secrets.DJANGO_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

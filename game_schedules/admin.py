@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from game_schedules.importer.breakaway.breakaway_loader import BreakawayLoader
+from importer.breakaway.breakaway_loader import BreakawayLoader
 from game_schedules.models import *
 
 

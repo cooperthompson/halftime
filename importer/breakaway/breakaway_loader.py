@@ -191,7 +191,7 @@ class BreakawayLoader:
         game_am = match.group(5)
 
         # Assume the game is in the evening, unless it is explicitly indicated to be morning
-        if game_am != "AM":
+        if game_am != "AM" and game_hr != 12:
             game_hr = game_hr + 12
         if game_hr == 24:
             game_hr = 0

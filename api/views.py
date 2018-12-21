@@ -1,6 +1,7 @@
 from datetime import timedelta
 
-from django.http import Http404, JsonResponse
+from dateutil import parser
+from django.http import JsonResponse
 from django_filters import rest_framework as filters
 from rest_framework import viewsets
 from api.serializers import *
@@ -62,6 +63,9 @@ def team_events(request):
     start = request.GET.get('start')
     end = request.GET.get('end')
 
+    start_date = parser.parse(start).date()
+    end_date = parser.parse(end).date()
+
     try:
         team = Team.objects.get(id=team_id)
         games = team.games()
@@ -69,17 +73,17 @@ def team_events(request):
         games = Game.objects.all()
 
     if start:
-        games = games.filter(time__date__gte=start)
+        games = games.filter(time__date__gte=start_date)
     if end:
-        games = games.filter(time__date__lt=end)
+        games = games.filter(time__date__lt=end_date)
     events = []
     for game in games:
         start_time = game.time
         end_time = game.time + timedelta(hours=1)
         event = {
             'title': game.name,
-            'start': start_time.isoformat(),
-            'end': end_time.isoformat()
+            'start': start_time,
+            'end': end_time
         }
         events.append(event)
 

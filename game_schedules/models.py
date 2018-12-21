@@ -34,7 +34,7 @@ class Field(models.Model):
         db_table = 'soccer_fields'
 
     def __str__(self):
-        return str(self.identifier)
+        return "Field {}".format(self.identifier)
 
 
 class Season(models.Model):

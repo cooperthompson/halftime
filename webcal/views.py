@@ -1,32 +1,91 @@
 from calendar import Calendar
 
-from django.http import HttpResponse
+import shortuuid as shortuuid
+from django.http import HttpResponse, Http404
 from icalendar import Calendar, Event, Alarm
 from game_schedules.models import *
 import datetime
 
 
 def ics(request):
-    team_id = request.GET.get('team_id')
-    team_slug = request.GET.get('team_name')
+    team_id_list = request.GET.getlist('team_id')
+    league_id_list = request.GET.getlist('league_id')
+    org_id_list = request.GET.getlist('org_id')
 
-    if team_id:
-        this_team = Team.objects.get(id=team_id)
-    elif team_slug:
-        this_team = Team.objects.get(slug=team_slug)
+    teams = get_teams(team_id_list)
+    leagues = get_leagues(league_id_list)
+    orgs = get_orgs(org_id_list)
 
-    games = Team.games.all()
-
-    games = games.order_by("time", "field")
+    if len(teams) == 1:
+        cal_name = teams[0].name
+    elif len(leagues) == 1:
+        cal_name = leagues[0].name
+    elif len(orgs) == 1:
+        cal_name = orgs[0].name
+    else:
+        cal_name = "Soccer Games"
 
     cal = Calendar()
-    cal.add('prodid', '-//Breakway Schedules//Soccer Calendars//EN')
+    cal.add('prodid', '-//Soccer Game Schedules//Soccer Calendars//EN')
     cal.add('version', '2.0')
-    cal.add('X-WR-CALNAME', this_team.name)
+    cal.add('X-WR-CALNAME', cal_name)
     cal.add('X-WR-TIMEZONE', 'CST6CDT')
-    cal.add('X-WR-CALDESC', 'Breakaway Team Schedule')
+    cal.add('X-WR-CALDESC', 'Soccer Team Schedule')
 
-    now_dt = datetime.now()
+    for team in teams:
+        for game in team.games().order_by("time", "field"):
+            add_game(cal, game)
+
+    for league in leagues:
+        for game in Game.objects.filter(league=league).order_by("time", "field"):
+            add_game(cal, game)
+
+    for org in orgs:
+        for league in League.objects.filter(org=org):
+            for game in Game.objects.filter(league=league).order_by("time", "field"):
+                add_game(cal, game)
+
+    return HttpResponse(cal.to_ical(), content_type='text/calendar')
+
+
+def get_teams(team_id_list):
+    teams = []
+    for team_id in team_id_list:
+        try:
+            team = Team.objects.get(id=team_id)
+            teams.append(team)
+        except Team.DoesNotExist:
+            # Just skip unrecognized teams
+            pass
+    return teams
+
+
+def get_leagues(league_id_list):
+    leagues = []
+    for league_id in league_id_list:
+        try:
+            league = League.objects.get(id=league_id)
+            leagues.append(league)
+        except League.DoesNotExist:
+            # Just skip unrecognized leagues
+            pass
+    return leagues
+
+
+def get_orgs(org_id_list):
+    orgs = []
+    for org_id in org_id_list:
+        try:
+            org = Organization.objects.get(id=org_id)
+            orgs.append(org)
+        except Organization.DoesNotExist:
+            # Just skip unrecognized teams
+            pass
+    return orgs
+
+
+def add_game(cal, game):
+    now_dt = datetime.datetime.now()
     now_string = "%04d%02d%02dT%02d%02d%02d" % (
         now_dt.year,
         now_dt.month,
@@ -36,33 +95,28 @@ def ics(request):
         now_dt.second
     )
 
-    for game in games:
-        event = Event()
-        try:
-            summary = '%s vs. %s' % (game.home_team, game.away_team)
-        except Exception:
-            summary = 'Breakaway game'
+    event = Event()
+    summary = '%s vs. %s' % (game.home_team, game.away_team)
 
-        if game.color_conflict:
-            desc = 'Color conflict! (%s vs. %s)' % (game.away_team.color, game.home_team.color)
-            summary += ' (color conflict)'
-            event.add('description', desc)
+    if game.color_conflict:
+        desc = 'Color conflict! ({} vs. {})'.format(game.away_team.color, game.home_team.color)
+        summary += ' (color conflict)'
+        event.add('description', desc)
 
-        event.add('summary', summary)
+    event.add('summary', summary)
+    event.add('dtstart', game.time)
+    event.add('dtend', game.time + datetime.timedelta(hours=1))
+    event.add('dtstamp', datetime.datetime.now())
+    event.add('location', "{}".format(game.field.short_name))
+    event['uid'] = '{}/{}@breakawaysports.com'.format(now_string, shortuuid.uuid())
+    event.add('priority', 5)
 
-        event.add('dtstart', game.time)
-        event.add('dtend', game.time + timedelta(hours=1))
-        event.add('dtstamp', datetime.now())
-        event.add('location', "BreakAway Field %s" % game.field)
-        event['uid'] = '%s/%s@breakawaysports.com' % (now_string, shortuuid.uuid())
-        event.add('priority', 5)
+    alarm = Alarm()
+    alarm.add("TRIGGER;RELATED=START", "-PT{0}M".format('45'))
+    alarm.add('action', 'display')
+    alarm.add('description', 'Breakaway game')
+    if game.color_conflict:
+        alarm.add('description', 'Color Conflict! - bring alternate color')
 
-        alarm = Alarm()
-        alarm.add("TRIGGER;RELATED=START", "-PT{0}M".format('45'))
-        alarm.add('action', 'display')
-        alarm.add('description', 'Breakaway game')
-
-        event.add_component(alarm)
-        cal.add_component(event)
-
-    return HttpResponse(cal.to_ical(), content_type='text/calendar')
+    event.add_component(alarm)
+    cal.add_component(event)

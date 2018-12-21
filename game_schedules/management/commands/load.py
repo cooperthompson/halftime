@@ -1,4 +1,4 @@
-from game_schedules.importer.breakaway.breakaway_loader import BreakawayLoader
+from importer.breakaway.breakaway_loader import BreakawayLoader
 from django.core.management.base import BaseCommand
 import logging
 import sys

@@ -20,9 +20,9 @@
             <div class="row">
                 <div class="col-12">
                     <ul>
-                    {% for game in games %}
-                        <li>{{ game }} - {{ game.time }}</li>
-                    {% endfor %}
+                        {% for game in games %}
+                            <li>{{ game }} - {{ game.time }}</li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -81,11 +81,14 @@
         $(function () {
             $('#calendar').fullCalendar({
                 defaultView: 'seasonView',
+                themeSystem: 'bootstrap4',
+                timezone: 'local',
                 header: {
-                    left: '',
-                    center: '',
-                    right: 'today prev,next'
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,seasonView'
                 },
+                navLinks: true,
                 buttonText: {
                     today: "Today"
                 },
