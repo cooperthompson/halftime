@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load webcal_tags %}
 
 {% block masthead_title %}
     Madison Soccer
@@ -12,7 +13,7 @@
     <!-- Games Grid Section -->
     <section id="games" class="content-section">
         <div class="container">
-            <div class="row mb-3">
+            <div class="row mb-2">
                 <div class="col-12">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#game-subscriptions">
                         Subscribe to schedule
@@ -59,12 +60,12 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         <button type="button" class="btn btn-primary" id="subscribe-ics">Subscribe to Schedule</button>
-                        <button type="button" class="btn btn-primary" id="subscribe-google">Add to Google Calendar</button>
+                        <button type="button" class="btn btn-primary" id="subscribe-google">Add to Google Calendar
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        a
     </section>
 
     <!-- Leagues Grid Section -->
@@ -138,6 +139,22 @@
                     }
                 }
             }).fullCalendar('addEventSource', '{% url 'events' %}');
+
+            $('#team-picker').select2({
+                width: "100%"
+            });
+
+            $('#subscribe-ics').click(function(event) {
+                event.preventDefault();
+                var queryParams = "?";
+                $('#team-picker').select2('data').forEach(function (team) {
+                    queryParams += 'team_id=' + team.id + "&";
+                });
+                console.log('{% webcal %}' + queryParams);
+                window.location.href = '{% webcal %}' + queryParams;
+            });
+            $('#subscribe-calendar').click(function () {
+            });
         });
     </script>
 {% endblock %}

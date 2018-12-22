@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load webcal_tags %}
+
 
 {% block masthead_title %}
     {{ team.name }}
@@ -31,6 +33,14 @@
     <!-- Games Grid Section -->
     <section id="games" class="content-section">
         <div class="container">
+            <div class="row mb-2">
+                <div class="col-12">
+                    <a href="{% webcal %}?team_id={{ team.id }}"
+                    class="btn btn-primary" id="subscribe-ics">Subscribe to Schedule</a>
+                    <a href="http://www.google.com/calendar/render?team_webcal"
+                       class="btn btn-primary" id="subscribe-google">Add to Google Calendar</a>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <div id="calendar"></div>

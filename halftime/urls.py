@@ -47,7 +47,7 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^team-autocomplete/$', TeamAutocomplete.as_view(), name='team-autocomplete'),
-    url(r'^webcal/', webcal_views.ics)
+    url(r'^webcal/', webcal_views.ics, name='webcal'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

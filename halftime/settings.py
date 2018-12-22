@@ -43,7 +43,7 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-S3_ENABLE = False
+S3_ENABLE = True
 if S3_ENABLE:
     DEFAULT_FILE_STORAGE = "django_s3_storage.storage.S3Storage"
     STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'game_schedules',
+    'webcal',
     'django_s3_storage',
 ]
 
