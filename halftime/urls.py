@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^team/$', game_schedule_views.team_view, name='team'),
     url(r'^league/$', game_schedule_views.league_view, name='league'),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/events/', api_views.team_events),
+    url(r'^api/events/', api_views.team_events, name='events'),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^team-autocomplete/$', TeamAutocomplete.as_view(), name='team-autocomplete'),

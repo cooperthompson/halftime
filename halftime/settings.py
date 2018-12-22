@@ -33,7 +33,26 @@ ALLOWED_HOSTS = ['*']
 # Breakaway Import Settings
 BREAKAWAY_START_TEAM_MARKER = "TEAM (COLOR)"
 BREAKAWAY_START_GAMES_MARKER = "WEEK 1"
-BREAKAWAY_GAME_RE = re.compile(r"(\d+)-(\d+)\s+(\d{1,2}:\d{2})([AaPp][Mm])(\d?)")
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.11/howto/static-files/
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+S3_ENABLE = False
+if S3_ENABLE:
+    DEFAULT_FILE_STORAGE = "django_s3_storage.storage.S3Storage"
+    STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+    AWS_S3_BUCKET_NAME = "halftime-media"
+
+    AWS_S3_BUCKET_NAME_STATIC = "halftime-static"
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_S3_BUCKET_NAME_STATIC
+
+    STATIC_URL = "https://%s/%s/".format(AWS_S3_CUSTOM_DOMAIN, 'static')
 
 # Application definition
 
@@ -52,18 +71,6 @@ INSTALLED_APPS = [
     'game_schedules',
     'django_s3_storage',
 ]
-
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
-
-YOUR_S3_BUCKET = "halftime-static"
-
-STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
-AWS_S3_BUCKET_NAME_STATIC = YOUR_S3_BUCKET
-
-# These next two lines will serve the static files directly
-# from the s3 bucket
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % YOUR_S3_BUCKET
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -153,19 +160,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
 
 ADMIN_SITE_HEADER = "Halftime Soccer Schedules"
 

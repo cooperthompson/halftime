@@ -116,7 +116,7 @@ class Game(models.Model):
     # store game "name" to avoid having to do extra database hits on the teams
     # many-to-many field when constructing the name.
     name = models.CharField(max_length=100)  # Example name:  "Stormtroopers vs. Whistlers"
-    league = models.ForeignKey(League, on_delete=models.CASCADE)
+    league = models.ForeignKey(League, on_delete=models.CASCADE, related_name="games")
     home_team = ChainedForeignKey(Team,
                                   chained_field='league',
                                   chained_model_field='league',

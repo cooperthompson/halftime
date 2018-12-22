@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from dateutil import parser
 from django.http import JsonResponse
+from django.template.loader import render_to_string
 from django_filters import rest_framework as filters
 from rest_framework import viewsets
 from api.serializers import *
@@ -80,8 +81,9 @@ def team_events(request):
     for game in games:
         start_time = game.time
         end_time = game.time + timedelta(hours=1)
+        game_title = render_to_string('inline-game.html', {'game': game})
         event = {
-            'title': game.name,
+            'title': game_title,
             'start': start_time,
             'end': end_time
         }
