@@ -53,4 +53,16 @@ def team_view(request):
     return HttpResponse(template.render(context, request=request))
 
 
+def breakaway_iframe(request):
+    leagues = League.objects.all().order_by('org')
 
+    template = loader.get_template('breakaway-iframe.html')
+    context = {
+        'leagues': leagues,
+    }
+    return HttpResponse(template.render(context, request=request))
+
+
+def breakaway_mock(request):
+    template = loader.get_template('breakaway-mock.html')
+    return HttpResponse(template.render(request=request))

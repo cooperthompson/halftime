@@ -47,6 +47,8 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^team-autocomplete/$', TeamAutocomplete.as_view(), name='team-autocomplete'),
+    url(r'^calendar/picker', game_schedule_views.breakaway_iframe, name='breakaway-iframe'),
+    url(r'^breakaway/mock', game_schedule_views.breakaway_mock, name='breakaway-mock'),
     url(r'^webcal/', webcal_views.ics, name='webcal'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

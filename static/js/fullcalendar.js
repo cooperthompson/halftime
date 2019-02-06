@@ -13808,7 +13808,7 @@ var TimeGridEventRenderer = /** @class */ (function (_super) {
             fullTimeText = this.getTimeText(seg.footprint, 'LT');
             startTimeText = this.getTimeText(seg.footprint, null, false); // displayEnd=false
         }
-        return '<a class="' + classes.join(' ') + '"' +
+        var htmlContent = '<a class="' + classes.join(' ') + '"' +
             (eventDef.url ?
                 ' href="' + util_1.htmlEscape(eventDef.url) + '"' :
                 '') +
@@ -13842,6 +13842,7 @@ var TimeGridEventRenderer = /** @class */ (function (_super) {
                 '<div class="fc-resizer fc-end-resizer" />' :
                 '') +
             '</a>';
+            return htmlContent;
     };
     // Given segments that are assumed to all live in the *same column*,
     // compute their verical/horizontal coordinates and assign to their elements.

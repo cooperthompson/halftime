@@ -125,7 +125,8 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay,seasonView'
+                    /** Need to hack up fullcalendar.js to allow links in non-list views**/
+                    /** right: 'month,agendaWeek,agendaDay,seasonView'**/
                 },
                 navLinks: true,
                 buttonText: {
@@ -140,10 +141,6 @@
                 }
             }).fullCalendar('addEventSource', '{% url 'events' %}');
 
-            $('#team-picker').select2({
-                width: "100%"
-            });
-
             $('#subscribe-ics').click(function(event) {
                 event.preventDefault();
                 var queryParams = "?";
@@ -153,7 +150,16 @@
                 console.log('{% webcal %}' + queryParams);
                 window.location.href = '{% webcal %}' + queryParams;
             });
-            $('#subscribe-calendar').click(function () {
+
+            $('#subscribe-google').click(function () {
+                event.preventDefault();
+                var queryParams = "?";
+                $('#team-picker').select2('data').forEach(function (team) {
+                    queryParams += 'team_id=' + team.id + "&";
+                });
+                var google_url = "http://www.google.com/calendar/render?cid=" + '{% webcal %}' + queryParams;
+                console.log(google_url);
+                window.location.href = google_url
             });
         });
     </script>

@@ -1,0 +1,91 @@
+{% load admin_static %}
+{% load staticfiles %}
+{% load webcal_tags %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+    <title>{% block title %}BreakAway Schedule{% endblock %}</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/breakaway.css' %}"/>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+    {% block blockbots %}
+        <meta name="robots" content="NONE,NOARCHIVE"/>
+    {% endblock %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body class="breakaway">
+
+<!-- Container -->
+<div id="breakaway-picker" class="container-fluid">
+    <div class="row col-md-12">
+        <p><b><i>Beta!</i></b> Subscribe to your team schedule on your mobile device or calendar app.</p>
+    </div>
+
+    <div class="row">
+        <form action="" id="breakaway-calendar-selecter">
+            <!-- Content -->
+            <div class="col-md-12">
+                <label class="mr-sm-2" for="team-picker">Teams</label>
+                <select name="team" class="custom-select mr-sm-2 team-selector selectpicker" id="team-picker">
+                    {% for league in leagues %}
+                        <optgroup label="{{ league }}" data-select2-id="league-{{ league.id }}">
+                            {% for team in league.teams.all %}
+                                <option value="{{ team.id }}"
+                                        data-select2-id="team-{{ team.id }}">{{ team }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    {% endfor %}
+                </select>
+                <br>
+                <input type="submit" id='subscribe-ics' name="action" value="Subscribe to team"/>
+                <input type="button" id='subscribe-google' name="action" value="Add to Google Calendar"/>
+                <input type="button" id='view-online' name="action" value="View Online"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% block extrascript %}
+    <script type="application/javascript">
+        $(function () {
+            $('#subscribe-ics').click(function (event) {
+                event.preventDefault();
+                var form = document.getElementById('breakaway-calendar-selecter');
+                var queryParams = "?team_id=" + form.team.value;
+                console.log('{% webcal %}' + queryParams);
+                window.location.href = '{% webcal %}' + queryParams;
+            });
+
+            $('#subscribe-google').click(function () {
+                event.preventDefault();
+                var form = document.getElementById('breakaway-calendar-selecter');
+                var queryParams = "?team_id=" + form.team.value;
+
+                console.log('{% webcal %}' + queryParams);
+                window.location.href = "http://www.google.com/calendar/render?cid=" + '{% webcal %}' + queryParams;
+            });
+
+            $('#view-online').click(function () {
+                event.preventDefault();
+                var form = document.getElementById('breakaway-calendar-selecter');
+                var queryParams = "?id=" + form.team.value;
+                console.log('{% url 'team' %}' + queryParams);
+                window.location.href = '{% url 'team' %}' + queryParams;
+            });
+
+        });
+
+    </script>
+{% endblock %}
+</body>
+</html>
+
+
