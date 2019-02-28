@@ -5,6 +5,8 @@
         "profile_name": null,
         "project_name": "halftime",
         "runtime": "python3.6",
-        "s3_bucket": "zappa-zgtwsi3jj"
+        "s3_bucket": "zappa-zgtwsi3jj",
+        "certificate_arn": "arn:aws:acm:us-east-1:460692835503:certificate/6d7a4a29-0538-4405-aaec-8f807ff217fe",
+        "domain": "soccer.merisai.com"
     }
 }

@@ -18,7 +18,7 @@ from halftime import secrets
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-YEAR_CUTOVER = True
+YEAR_CUTOVER = False
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 # Breakaway Import Settings
 BREAKAWAY_START_TEAM_MARKER = "TEAM (COLOR)"
-BREAKAWAY_START_GAMES_MARKER = "WEEK 1"
+BREAKAWAY_START_GAMES_MARKER = "GAMES START"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

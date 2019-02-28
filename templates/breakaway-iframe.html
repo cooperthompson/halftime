@@ -61,24 +61,24 @@
                 var form = document.getElementById('breakaway-calendar-selecter');
                 var queryParams = "?team_id=" + form.team.value;
                 console.log('{% webcal %}' + queryParams);
-                window.location.href = '{% webcal %}' + queryParams;
+                window.top.location = '{% webcal %}' + queryParams;
             });
 
-            $('#subscribe-google').click(function () {
+            $('#subscribe-google').click(function (event) {
                 event.preventDefault();
                 var form = document.getElementById('breakaway-calendar-selecter');
                 var queryParams = "?team_id=" + form.team.value;
 
                 console.log('{% webcal %}' + queryParams);
-                window.location.href = "http://www.google.com/calendar/render?cid=" + '{% webcal %}' + queryParams;
+                window.top.location = "http://www.google.com/calendar/render?cid=" + '{% webcal %}' + queryParams;
             });
 
-            $('#view-online').click(function () {
+            $('#view-online').click(function (event) {
                 event.preventDefault();
                 var form = document.getElementById('breakaway-calendar-selecter');
                 var queryParams = "?id=" + form.team.value;
                 console.log('{% url 'team' %}' + queryParams);
-                window.location.href = '{% url 'team' %}' + queryParams;
+                window.top.location = '{% url 'team' %}' + queryParams;
             });
 
         });

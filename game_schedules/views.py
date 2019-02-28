@@ -1,11 +1,17 @@
 from django.http import HttpResponse, Http404
 from django.template import loader
+from django.views.decorators.clickjacking import xframe_options_exempt
+
 from game_schedules.models import *
-import datetime
+from datetime import date, timedelta
 
 
 def home_view(request):
-    games = Game.objects.filter(time__date=datetime.datetime.now())[:10]
+    today = date.today()
+    tomorrow = today + timedelta(days=1)
+    games = Game.objects.filter(time__gte=today)
+    games = games.filter(time__lt=tomorrow)
+    games = games.order_by("time", "field")
 
     leagues = League.objects.all().order_by('org')
 
@@ -53,6 +59,7 @@ def team_view(request):
     return HttpResponse(template.render(context, request=request))
 
 
+@xframe_options_exempt
 def breakaway_iframe(request):
     leagues = League.objects.all().order_by('org')
 

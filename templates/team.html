@@ -20,15 +20,6 @@
     </nav>
 {% endblock %}
 
-{% block extrascript %}
-    <script src="{% static 'js/halftime-team-calendar.js' %}"></script>
-    <script type="application/javascript">
-        $(function () {
-            $('#calendar').fullCalendar('addEventSource', '/api/events/?team_id={{ team.id }}');
-        });
-    </script>
-{% endblock %}
-
 {% block content %}
     <!-- Games Grid Section -->
     <section id="games" class="content-section">
@@ -36,17 +27,53 @@
             <div class="row mb-2">
                 <div class="col-12">
                     <a href="{% webcal %}?team_id={{ team.id }}"
-                    class="btn btn-primary" id="subscribe-ics">Subscribe to Schedule</a>
-                    <a href="http://www.google.com/calendar/render?team_webcal"
+                       class="btn btn-primary" id="subscribe-ics">Subscribe to Schedule</a>
+                    <a href="http://www.google.com/calendar/render?cid={% webcal %}?team_id={{ team.id }}"
                        class="btn btn-primary" id="subscribe-google">Add to Google Calendar</a>
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
-                    <div id="calendar"></div>
-                </div>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Home Team</th>
+                        <th>Away Team</th>
+                        <th>Game Time</th>
+                        <th>Game Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for game in games %}
+                        <tr>
+                            <td>{{ game.field }}</td>
+                            <td>
+                                <a href="{% url 'team' %}?id={{ game.home_team.id }}"
+                                   title="{{ game.home_team }}">
+                                    {{ game.home_team.name }}({{ game.home_team.color }})
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'team' %}?id={{ game.away_team.id }}"
+                                   title="{{ game.away_team }}">
+                                    {{ game.away_team.name }}({{ game.away_team.color }})
+                                </a>
+                                {% if game.color_conflict %}
+                                    <span class="glyphicon glyphicon-flag" title="Color conflict"></span>
+                                {% endif %}
+                            </td>
+                            <td>{{ game.time|time:"g:i a" }}</td>
+                            <td>
+                                {{ game.time|date:"M d (l)" }}
+                                {% if game.is_today %}
+                                    <span class="glyphicon glyphicon-calendar" title="Today"></span>
+                                {% endif %}</td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
 {% endblock %}
-

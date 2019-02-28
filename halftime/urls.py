@@ -50,6 +50,7 @@ urlpatterns = [
     url(r'^calendar/picker', game_schedule_views.breakaway_iframe, name='breakaway-iframe'),
     url(r'^breakaway/mock', game_schedule_views.breakaway_mock, name='breakaway-mock'),
     url(r'^webcal/', webcal_views.ics, name='webcal'),
+    url(r'^chaining/', include('smart_selects.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

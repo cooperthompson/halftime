@@ -63,8 +63,11 @@ class BreakawayLoader:
                 if parse_state == "teams" and re.match("\\d+.*", line.strip()):
                     self.save_team(line)
 
+                if re.match(r"\s*WEEK\s+\d*", line):
+                    continue
+
                 # regex check for the date row (e.g. Mo.Feb 3)
-                match = re.match(r"\w+\.\s?(\w+)\.?\s+?(\d+)", line)
+                match = re.match(r"\w+\.*\s?(\w+)\.?\s+?(\d+)", line)
                 if parse_state == "games" and match:
                     game_date = self.parse_game_date(match, line)
                     self.logger.info("Processing games on {}".format(game_date.strftime('%a %b %d')))

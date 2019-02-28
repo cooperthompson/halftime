@@ -62,7 +62,7 @@ class TeamAdmin(admin.ModelAdmin):
 
 
 class GameAdmin(admin.ModelAdmin):
-    fields = ['league', 'teams', 'time', 'field']
+    fields = ['league', 'home_team', 'away_team', 'time', 'field']
     list_display = ['id', '__str__',
                     'time',
                     'field']
