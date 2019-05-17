@@ -50,9 +50,9 @@ if S3_ENABLE:
     AWS_S3_BUCKET_NAME = "halftime-media"
 
     AWS_S3_BUCKET_NAME_STATIC = "halftime-static"
-    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_S3_BUCKET_NAME_STATIC
+    AWS_S3_CUSTOM_DOMAIN = '{}.s3.amazonaws.com'.format(AWS_S3_BUCKET_NAME_STATIC)
 
-    STATIC_URL = "https://%s/%s/".format(AWS_S3_CUSTOM_DOMAIN, 'static')
+    STATIC_URL = "https://{}/{}/".format(AWS_S3_CUSTOM_DOMAIN, 'static')
 
 # Application definition
 
@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'smart_selects',
     'rest_framework',
     'django_filters',
     'game_schedules',

@@ -60,6 +60,13 @@ class League(models.Model):
     breakaway_word_file = models.FileField(null=True, blank=True)
     breakaway_import_file = models.FileField(null=True, blank=True)
 
+    team_file = models.FileField(null=True, blank=True)
+    game_file = models.FileField(null=True, blank=True)
+
+    google_sheet_id = models.CharField(max_length=50, null=True, blank=True)
+    sheets_teams_named_range = models.CharField(max_length=50, null=True, blank=True)
+    sheets_games_named_range = models.CharField(max_length=50, null=True, blank=True)
+
     class Meta:
         managed = True
         db_table = 'soccer_leagues'
@@ -117,14 +124,17 @@ class Game(models.Model):
     # many-to-many field when constructing the name.
     name = models.CharField(max_length=100)  # Example name:  "Stormtroopers vs. Whistlers"
     league = models.ForeignKey(League, on_delete=models.CASCADE, related_name="games")
-    home_team = ChainedForeignKey(Team,
-                                  chained_field='league',
-                                  chained_model_field='league',
-                                  related_name='home_team')
-    away_team = ChainedForeignKey(Team,
-                                  chained_field='league',
-                                  chained_model_field='league',
-                                  related_name='away_team')
+    # home_team = ChainedForeignKey(Team,
+    #                               chained_field='league',
+    #                               chained_model_field='league',
+    #                               related_name='home_team')
+    # away_team = ChainedForeignKey(Team,
+    #                               chained_field='league',
+    #                               chained_model_field='league',
+    #                               related_name='away_team')
+    home_team = models.ForeignKey(Team, related_name='home_team', on_delete=models.CASCADE)
+    away_team = models.ForeignKey(Team, related_name='away_team', on_delete=models.CASCADE)
+
     time = models.DateTimeField()
     field = models.ForeignKey(Field, null=True, blank=True, on_delete=models.CASCADE)
 

@@ -4,16 +4,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+django-zappa = ">=0.13.1"
 
 [packages]
 Django = ">=2.1.4"
-django-autocomplete-light = "==3.3.2"
+django-autocomplete-light = ">=3.3.2"
 django-crispy-forms = "*"
 django-debug-toolbar = "*"
 django-filter = "*"
-django-smart-selects = "==1.5.4"
-django-zappa = "==0.13.1"
-djangorestframework = "==3.9.0"
+django-smart-selects = ">=1.5.4"
+djangorestframework = ">=3.9.0"
 psycopg2-binary = ">=2.7.6.1"
 icalendar = ">=4.0.3"
 python-dateutil = "*"
@@ -21,9 +21,9 @@ python-slugify = "*"
 pytz = "*"
 requests = ">=2.21.0"
 shortuuid = "*"
-base58 = "*"
 urllib3 = "*"
 django-s3-storage = "*"
+
 
 [requires]
 python_version = "3.6"

@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 
 from importer.breakaway.breakaway_loader import BreakawayLoader
+from importer.E608.E608_loader import E608Loader
 from game_schedules.models import *
 
 
@@ -29,14 +30,36 @@ class OrganizationAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
+def load_teams_from_sheets(modeladmin, request, queryset):
+    for obj in queryset:
+        sheet_id = obj.google_sheet_id
+        print(sheet_id)
+
+
+def load_teams_from_file(modeladmin, request, queryset):
+    for league in queryset:
+        loader = E608Loader(league)
+        loader.load_teams()
+
+
+def load_games_from_file(modeladmin, request, queryset):
+    for league in queryset:
+        loader = E608Loader(league)
+        loader.load_games()
+
+
 class LeagueAdmin(admin.ModelAdmin):
     inlines = [TeamInline]
-    fields = ['name', 'is_active', 'org', 'logo', 'breakaway_import_file']
-    list_display = ['__str__', 'name', 'is_active', 'breakaway_import_file', 'logo']
+    fields = ['name', 'is_active', 'org', 'logo',
+              'team_file', 'game_file']
+    list_display = ['__str__', 'name', 'is_active', 'logo',
+                    'team_file', 'game_file']
     search_fields = ['name']
     list_filter = ['is_active']
-    list_editable = ['name', 'is_active', 'breakaway_import_file', 'logo']
+    list_editable = ['name', 'is_active', 'logo',
+                     'team_file', 'game_file']
     autocomplete_fields = ['org']
+    actions = [load_teams_from_file]
 
     def save_model(self, request, obj, form, change):
         super(LeagueAdmin, self).save_model(request, obj, form, change)
@@ -52,6 +75,13 @@ class LeagueAdmin(admin.ModelAdmin):
                 if orig.breakaway_import_file != obj.breakaway_import_file:
                     loader = BreakawayLoader(obj)
                     loader.import_text_file(change)
+
+
+class FieldAdmin(admin.ModelAdmin):
+    list_filter = ['name']
+    list_display = ['name', 'short_name']
+    list_display_links = ['name']
+    search_fields = ['number', 'name']
 
 
 class TeamAdmin(admin.ModelAdmin):
@@ -77,5 +107,6 @@ admin.site.site_title = 'Halftime administration'
 
 admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(League, LeagueAdmin)
+admin.site.register(Field, FieldAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Game, GameAdmin)
