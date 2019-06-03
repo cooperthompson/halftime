@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.urls import path
 from rest_framework import routers
 from api.views import *
 from django.contrib import admin
@@ -40,8 +41,8 @@ router.register(r'games', GameViewSet)
 
 urlpatterns = [
     url(r'^$', game_schedule_views.home_view, name='home'),
-    url(r'^team/$', game_schedule_views.team_view, name='team'),
-    url(r'^league/$', game_schedule_views.league_view, name='league'),
+    path('team/<slug:slug>', game_schedule_views.team_view, name='team'),
+    path('league/<slug:slug>', game_schedule_views.league_view, name='league'),
     url(r'^admin/', admin.site.urls),
     url(r'^api/events/', api_views.team_events, name='events'),
     url(r'^api/', include(router.urls)),

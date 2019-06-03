@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load webcal_tags %}
 
 {% block masthead_title %}
     {{ league.name }}
@@ -9,7 +10,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active"><a href="{% url 'league' %}?id={{ league.id }}">{{ league }}</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'league' league.slug %}">{{ league }}</a></li>
         </ol>
     </nav>
 {% endblock %}
@@ -22,7 +23,7 @@
                 {% for team in teams %}
                     <span class="mdl-list__item mdl-list__item--two-line col-md-6">
                         <span class="mdl-list__item-primary-content">
-                            <span><a href="{% url 'team' %}?id={{ team.id }}">{{ team }}</a></span>
+                            <span><a href="{% url 'team' team.slug %}">{{ team }}</a></span>
                             <span class="mdl-list__item-sub-title">{{ team.games.count }} Games</span>
                         </span>
                     </span>
@@ -30,4 +31,84 @@
             </div>
         </div>
     </section>
+
+    <section id="games" class="content-section">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-12">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#game-subscriptions">
+                        Subscribe to schedule
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                {% include 'games.html' with games=games %}
+            </div>
+        </div>
+
+        <div class="modal fade" id="game-subscriptions" tabindex="-1" role="dialog"
+             aria-labelledby="#game-subscriptions-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="#game-subscriptions-title">Subscribe to game schedules</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-row">
+                                <div class="col">
+                                    <label class="mr-sm-2" for="team-picker">Teams</label>
+                                    <select class="custom-select mr-sm-2" id="team-picker" multiple="multiple">
+                                        {% for team in teams %}
+                                            <option value="{{ team.id }}"
+                                                    data-select2-id="team-{{ team.id }}">{{ team }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="subscribe-ics">Subscribe to Schedule</button>
+                        <button type="button" class="btn btn-primary" id="subscribe-google">Add to Google Calendar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+
+{% block extrascript %}
+    <script type="application/javascript">
+        $(function () {
+            $('#subscribe-ics').click(function (event) {
+                event.preventDefault();
+                var queryParams = "?";
+                $('#team-picker').select2('data').forEach(function (team) {
+                    queryParams += 'team_id=' + team.id + "&";
+                });
+                console.log('{% webcal %}' + queryParams);
+                window.location.href = '{% webcal %}' + queryParams;
+            });
+
+            $('#subscribe-google').click(function () {
+                event.preventDefault();
+                var queryParams = "?";
+                $('#team-picker').select2('data').forEach(function (team) {
+                    queryParams += 'team_id=' + team.id + "&";
+                });
+                queryParams = encodeURIComponent(queryParams);
+                var google_url = "http://www.google.com/calendar/render?cid=" + '{% webcal %}' + queryParams;
+                console.log(google_url);
+                window.location.href = google_url
+            });
+        });
+    </script>
 {% endblock %}

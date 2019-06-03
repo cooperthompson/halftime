@@ -1,1 +1,1 @@
-<a href="{% url 'team' %}?id={{ game.home_team.id }}">{{ game.home_team.name }}</a> vs. <a href="{% url 'team' %}?id={{ game.away_team.id }}">{{ game.away_team.name }}</a>
+<a href="{% url 'team' game.home_team.slug %}">{{ game.home_team.name }}</a> vs. <a href="{% url 'team' game.away_team.slug %}">{{ game.away_team.name }}</a>

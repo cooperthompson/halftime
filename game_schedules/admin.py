@@ -50,7 +50,7 @@ def load_games_from_file(modeladmin, request, queryset):
 
 class LeagueAdmin(admin.ModelAdmin):
     inlines = [TeamInline]
-    fields = ['name', 'is_active', 'org', 'logo',
+    fields = ['name', 'is_active', 'org', 'logo', 'slug',
               'team_file', 'game_file']
     list_display = ['__str__', 'name', 'is_active', 'logo',
                     'team_file', 'game_file']
@@ -59,9 +59,10 @@ class LeagueAdmin(admin.ModelAdmin):
     list_editable = ['name', 'is_active', 'logo',
                      'team_file', 'game_file']
     autocomplete_fields = ['org']
-    actions = [load_teams_from_file]
+    actions = [load_teams_from_file, load_games_from_file]
 
-    def save_model(self, request, obj, form, change):
+    def save_model_nope(self, request, obj, form, change):
+        # Not used anymore.  Using actions instead
         super(LeagueAdmin, self).save_model(request, obj, form, change)
         if obj.breakaway_import_file:
 
@@ -75,6 +76,26 @@ class LeagueAdmin(admin.ModelAdmin):
                 if orig.breakaway_import_file != obj.breakaway_import_file:
                     loader = BreakawayLoader(obj)
                     loader.import_text_file(change)
+
+        if obj.team_file:
+            if not change:
+                loader = E608Loader(obj)
+                loader.load_teams()
+            else:
+                orig = League.objects.get(pk=obj.pk)
+                if orig.team_file != obj.team_file:
+                    loader = E608Loader(obj)
+                    loader.load_teams()
+
+        if obj.game_file:
+            if not change:
+                loader = E608Loader(obj)
+                loader.load_games()
+            else:
+                orig = League.objects.get(pk=obj.pk)
+                if orig.game_file != obj.game_file:
+                    loader = E608Loader(obj)
+                    loader.load_games()
 
 
 class FieldAdmin(admin.ModelAdmin):

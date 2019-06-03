@@ -37,13 +37,13 @@
                         <tr>
                             <td>{{ game.field }}</td>
                             <td>
-                                <a href="{% url 'team' %}?id={{ game.home_team.id }}"
+                                <a href="{% url 'team' game.home_team.slug %}"
                                    title="{{ game.home_team }}">
                                     {{ game.home_team.name }}({{ game.home_team.color }})
                                 </a>
                             </td>
                             <td>
-                                <a href="{% url 'team' %}?id={{ game.away_team.id }}"
+                                <a href="{% url 'team' game.away_team.slug %}"
                                    title="{{ game.away_team }}">
                                     {{ game.away_team.name }}({{ game.away_team.color }})
                                 </a>
@@ -124,7 +124,7 @@
                                 <img src="{{ league.logo.url }}" class="img-fluid" alt="{{ league.name }}"
                                      title="{{ league.name }}">
                             {% endif %}
-                            <span><a href="{% url 'league' %}?id={{ league.id }}">{{ league }}</a></span>
+                            <span><a href="{% url 'league' league.slug %}">{{ league }}</a></span>
                             <span class="mdl-list__item-sub-title">{{ league.teams.count }} Teams</span>
                         </span>
                     </span>
@@ -163,7 +163,7 @@
                 timezone: 'local',
                 header: {
                     left: 'prev,next today',
-                    center: 'title',
+                    center: 'title'
                     /** Need to hack up fullcalendar.js to allow links in non-list views**/
                     /** right: 'month,agendaWeek,agendaDay,seasonView'**/
                 },

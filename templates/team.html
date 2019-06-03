@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% load webcal_tags %}
+
 
 
 {% block masthead_title %}
@@ -14,8 +14,8 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'league' %}?id={{ team.league.id }}">{{ team.league }}</a></li>
-            <li class="breadcrumb-item active"><a href="{% url 'team' %}?id={{ team.id }}">{{ team }}</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'league' team.league.slug %}">{{ team.league }}</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'team' team.slug %}">{{ team }}</a></li>
         </ol>
     </nav>
 {% endblock %}
@@ -23,6 +23,8 @@
 {% block content %}
     <!-- Games Grid Section -->
     <section id="games" class="content-section">
+        {% load webcal_tags %}
+
         <div class="container">
             <div class="row mb-2">
                 <div class="col-12">
@@ -33,46 +35,7 @@
                 </div>
             </div>
             <div class="row">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>Field</th>
-                        <th>Home Team</th>
-                        <th>Away Team</th>
-                        <th>Game Time</th>
-                        <th>Game Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for game in games %}
-                        <tr>
-                            <td>{{ game.field }}</td>
-                            <td>
-                                <a href="{% url 'team' %}?id={{ game.home_team.id }}"
-                                   title="{{ game.home_team }}">
-                                    {{ game.home_team.name }}({{ game.home_team.color }})
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{% url 'team' %}?id={{ game.away_team.id }}"
-                                   title="{{ game.away_team }}">
-                                    {{ game.away_team.name }}({{ game.away_team.color }})
-                                </a>
-                                {% if game.color_conflict %}
-                                    <span class="glyphicon glyphicon-flag" title="Color conflict"></span>
-                                {% endif %}
-                            </td>
-                            <td>{{ game.time|time:"g:i a" }}</td>
-                            <td>
-                                {{ game.time|date:"M d (l)" }}
-                                {% if game.is_today %}
-                                    <span class="glyphicon glyphicon-calendar" title="Today"></span>
-                                {% endif %}</td>
-
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                {% include 'games.html' %}
             </div>
         </div>
     </section>

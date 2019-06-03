@@ -1,5 +1,5 @@
 {
-    "prd": {
+    "dev": {
         "django_settings": "halftime.settings",
         "aws_region": "us-east-2",
         "profile_name": null,

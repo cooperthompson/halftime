@@ -24,29 +24,28 @@ def home_view(request):
     return HttpResponse(template.render(context, request=request))
 
 
-def league_view(request):
-    league_id = request.GET.get('id')
-
+def league_view(request, slug):
     try:
-        league = League.objects.get(id=league_id)
+        league = League.objects.get(slug=slug)
     except League.DoesNotExist:
         raise Http404("Oops!  We couldn't find the league you were looking for.")
 
     teams = Team.objects.filter(league=league)
+    games = Game.objects.filter(league=league)
+    games = games.select_related('home_team', 'away_team', 'field')
 
     template = loader.get_template('league.html')
     context = {
         'teams': teams,
-        'league': league
+        'league': league,
+        'games': games
     }
     return HttpResponse(template.render(context, request=request))
 
 
-def team_view(request):
-    team_id = request.GET.get('id')
-
+def team_view(request, slug):
     try:
-        team = Team.objects.get(id=team_id)
+        team = Team.objects.get(slug=slug)
     except Team.DoesNotExist:
         raise Http404("Oops!  We couldn't find the team you were looking for.")
     games = team.games()
