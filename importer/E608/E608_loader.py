@@ -46,6 +46,7 @@ class E608Loader(LeagueImporter):
                         league=self.league,
                         slug=slugify(line_array[0]))
             team.save()
+            self.logger.info("Loaded team {}".format(team))
 
     def load_games_from_file(self):
         for line in self.league.game_file:
@@ -70,6 +71,12 @@ class E608Loader(LeagueImporter):
     def save_game(self, match, game_datetime):
         home_team = self.get_team(match.group(4), self.league)
         away_team = self.get_team(match.group(5), self.league)
+
+        # Handle the mixed Nike/Umbro game file
+        if home_team is None and away_team is None:
+            self.logger.info("Skipping game {}v{} - team not found in this league.".format(match.group(4),
+                                                                                           match.group(5)))
+
         game_field = self.parse_game_field(match.group(3))
 
         game_name = '{} vs. {} at {}'.format(home_team, away_team, game_field.name)

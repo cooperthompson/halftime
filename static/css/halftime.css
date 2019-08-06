@@ -187,3 +187,12 @@ header.masthead h1 {
 .leagues {
     width: 100%;
 }
+
+a:visited {
+    color: #212D52;
+}
+
+a {
+    color: #5371CE;
+    text-decoration: none;
+}
