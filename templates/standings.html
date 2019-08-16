@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load webcal_tags %}
+
+{% block masthead_title %}
+    {{ league.name }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'league' league.slug %}">{{ league }}</a></li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <!-- Teams Grid Section -->
+    <section id="teams" class="content-section">
+        <div class="container">
+            <div class="row mt-5">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Team</th>
+                        <th>GP</th>
+                        <th>W</th>
+                        <th>T</th>
+                        <th>L</th>
+                        <th>GF</th>
+                        <th>GA</th>
+                        <th>GD</th>
+                        <th>Points</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for team in teams %}
+                        <tr>
+                            <th>{{ team }}</th>
+                            <th>{{ team.games_played }}</th>
+                            <th>{{ team.wins }}</th>
+                            <th>{{ team.ties }}</th>
+                            <th>{{ team.losses }}</th>
+                            <th>{{ team.goals_for }}</th>
+                            <th>{{ team.goals_against }}</th>
+                            <th>{{ team.goal_differential}}</th>
+                            <th>{{ team.league_points }}</th>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

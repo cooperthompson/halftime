@@ -72,3 +72,21 @@ def breakaway_iframe(request):
 def breakaway_mock(request):
     template = loader.get_template('breakaway-mock.html')
     return HttpResponse(template.render(request=request))
+
+
+def standings(request, slug):
+    try:
+        league = League.objects.get(slug=slug)
+    except League.DoesNotExist:
+        raise Http404("Oops!  We couldn't find the league you were looking for.")
+
+    teams = Team.objects.filter(league=league)
+    for team in teams:
+        team.calculate_stats()
+
+    template = loader.get_template('standings.html')
+    context = {
+        'teams': teams,
+        'league': league,
+    }
+    return HttpResponse(template.render(context, request=request))

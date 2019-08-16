@@ -114,12 +114,15 @@ class TeamAdmin(admin.ModelAdmin):
 
 class GameAdmin(admin.ModelAdmin):
     fields = ['league', 'home_team', 'away_team', 'time', 'field']
-    list_display = ['id', '__str__',
+    list_display = ['id',
+                    'home_team', 'home_team_score',
+                    'away_team', 'away_team_score',
                     'time',
                     'field']
-    list_display_links = ['__str__']
-    list_filter = ['league']
-    search_fields = ['home_team__name', 'away_team__name']
+    list_editable = ['home_team_score', 'away_team_score']
+    list_display_links = ['id']
+    list_filter = ['league', 'time']
+    search_fields = ['home_team__name', 'away_team__name', 'time', 'league__name']
 
 
 admin.site.site_header = 'Halftime administration'

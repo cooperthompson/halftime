@@ -43,6 +43,7 @@ urlpatterns = [
     url(r'^$', game_schedule_views.home_view, name='home'),
     path('team/<slug:slug>', game_schedule_views.team_view, name='team'),
     path('league/<slug:slug>', game_schedule_views.league_view, name='league'),
+    path('standings/<slug:slug>', game_schedule_views.standings, name='standings'),
     url(r'^admin/', admin.site.urls),
     url(r'^api/events/', api_views.team_events, name='events'),
     url(r'^api/', include(router.urls)),
