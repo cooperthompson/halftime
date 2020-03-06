@@ -1,0 +1,200 @@
+{% load staticfiles %}
+
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>608Elite Soccer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- styles -->
+  <link href="static/assets/css/bootstrap.css" rel="stylesheet">
+  <link href="static/assets/css/bootstrap-responsive.css" rel="stylesheet">
+  <link href="static/assets/css/prettyPhoto.css" rel="stylesheet">
+  <link href="static/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+  <link href="static/assets/css/flexslider.css" rel="stylesheet">
+  <link href="static/assets/css/style.css" rel="stylesheet">
+  <link href="static/assets/color/default.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,600,400italic|Open+Sans:400,600,700" rel="stylesheet">
+
+  <!-- fav and touch icons -->
+  <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="static/assets/ico/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="static/assets/ico/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="static/assets/ico/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="static/assets/ico/apple-touch-icon-57-precomposed.png">
+
+  <!-- =======================================================
+    Theme Name: Lumia
+    Theme URL: https://bootstrapmade.com/lumia-bootstrap-business-template/
+    Author: BootstrapMade.com
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+      <!-- Navbar
+    ================================================== -->
+      <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- logo -->
+            <div class="logo">
+              <a href="index.html"><img src="static/img/608elite.png" alt="" /></a>
+            </div>
+            <!-- end logo -->
+
+            <!-- top menu -->
+            <div class="navigation">
+              <nav>
+                <ul class="nav topnav">
+                  <li class="active">
+                    <a href="index.html"><i class="icon-home"></i> Home </a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#"><i class="fa fa-users"></i> Teams <i class="icon-angle-down"></i></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="media.html">Puma</a></li>
+                      <li><a href="color-scheme.html">Nike</a></li>
+                      <li><a href="buttons.html">Umbro</a></li>
+                      <li><a href="components.html">Kappa</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="https://www.facebook.com/608elite/"><i class="icon-facebook-sign"></i> Contact</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <!-- end menu -->
+
+          </div>
+        </div>
+      </div>
+    </header>
+    <section id="intro">
+
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <!-- Place somewhere in the <body> of your page -->
+            <div id="mainslider" class="flexslider">
+              <ul class="slides">
+                <li data-thumb="static/assets/img/slides/flexslider/img1.jpg">
+                  <img src="{% static 'img/reddan-overlay.jpg' %}" alt="" />
+                  <div class="flex-caption primary">
+                    <h2>Make Soccer Great Again!</h2>
+                    <p>Premier Madison soccer league!</p>
+                  </div>
+                </li>
+                <li data-thumb="static/assets/img/slides/flexslider/img1.jpg">
+                  <img src="{% static 'img/barksalona.jpg' %}" alt="" />
+                  <div class="flex-caption primary">
+                    <h2>Make Soccer Great Again!</h2>
+                    <p>Premier Madison soccer league!</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <section id="maincontent">
+      <div class="container">
+
+        <div class="row">
+          <div class="span3 features e_pulse">
+            <img src="{% static 'img/leagues/608puma.png' %}" alt="" />
+            <div class="box">
+              <div class="divcenter">
+                <h4>Puma</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="span3 features e_pulse">
+            <img src="{% static 'img/leagues/608nike.png' %}" alt="" />
+            <div class="box">
+              <div class="divcenter">
+                <h4>Nike</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="span3 features e_pulse">
+            <img src="{% static 'img/leagues/608umbro.png' %}" alt="" />
+            <div class="box">
+              <div class="divcenter">
+                <h4>Umbro</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="span3 features e_pulse">
+            <img src="{% static 'img/leagues/608umbro.png' %}" alt="" />
+            <div class="box">
+              <div class="divcenter">
+                <h4>Kappa</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer
+ ================================================== -->
+    <footer class="footer">
+      <div class="verybottom">
+        <div class="container">
+          <div class="row">
+            <div class="span6">
+              <p>
+                &copy; Lumia - All right reserved
+              </p>
+            </div>
+            <div class="span6">
+              <div class="pull-right">
+                <div class="credits">
+                  <!--
+                    All the links in the footer should remain intact.
+                    You can delete the links only if you purchased the pro version.
+                    Licensing information: https://bootstrapmade.com/license/
+                    Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Lumia
+                  -->
+                  Created by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <!-- end wrapper -->
+  <a href="#" class="scrollup"><i class="icon-chevron-up icon-square icon-48 active"></i></a>
+
+  <script src="static/assets/js/jquery.js"></script>
+  <script src="static/assets/js/raphael-min.js"></script>
+  <script src="static/assets/js/jquery.easing.1.3.js"></script>
+  <script src="static/assets/js/bootstrap.js"></script>
+  <script src="static/assets/js/google-code-prettify/prettify.js"></script>
+  <script src="static/assets/js/jquery.elastislide.js"></script>
+  <script src="static/assets/js/jquery.prettyPhoto.js"></script>
+  <script src="static/assets/js/jquery.flexslider.js"></script>
+  <script src="static/assets/js/jquery-hover-effect.js"></script>
+  <script src="static/assets/js/animate.js"></script>
+
+  <!-- Template Custom JavaScript File -->
+  <script src="static/assets/js/custom.js"></script>
+  <script src="https://kit.fontawesome.com/c51d365061.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

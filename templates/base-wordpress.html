@@ -1,0 +1,183 @@
+{% load staticfiles %}
+
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>MAKING SOCCER 1ST AGAIN</title>
+
+    <link rel="stylesheet" id="ixion-style-css"
+          href="https://608elitewi.com/wp-content/themes/ixion/style.css?ver=5.2.1" type="text/css" media="all">
+    <link rel="stylesheet" id="ixion-fonts-cooper-css"
+          href="https://608elitewi.com/wp-content/themes/ixion/assets/fonts/cooperhewitt.css" type="text/css"
+          media="all">
+    <link rel="stylesheet" id="genericons-css"
+          href="https://c0.wp.com/p/jetpack/7.3.1.1/_inc/genericons/genericons/genericons.css" type="text/css"
+          media="all">
+    <link rel="stylesheet" id="ixion-wpcom-css"
+          href="https://608elitewi.com/wp-content/themes/ixion/inc/style-wpcom.css?ver=5.2.1" type="text/css"
+          media="all">
+    <link rel="icon"
+          href="https://i0.wp.com/608elitewi.com/wp-content/uploads/2019/04/cropped-608logo_v7-01.png?fit=32%2C32&amp;ssl=1"
+          sizes="32x32">
+    <link rel="icon"
+          href="https://i0.wp.com/608elitewi.com/wp-content/uploads/2019/04/cropped-608logo_v7-01.png?fit=192%2C192&amp;ssl=1"
+          sizes="192x192">
+    <link rel="apple-touch-icon-precomposed"
+          href="https://i0.wp.com/608elitewi.com/wp-content/uploads/2019/04/cropped-608logo_v7-01.png?fit=180%2C180&amp;ssl=1">
+    <meta name="msapplication-TileImage"
+          content="https://i0.wp.com/608elitewi.com/wp-content/uploads/2019/04/cropped-608logo_v7-01.png?fit=270%2C270&amp;ssl=1">
+    <style type="text/css" id="wp-custom-css">
+        div.header-overlay {
+            margin-right: 0;
+            margin-left: 0;
+            max-width: 100%;
+        }
+
+        div.header-overlay img {
+            width: 100%;
+        }            </style>
+
+
+    <!-- Yeti Bootstrap Theme  -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.css">
+
+    <!-- Theme CSS -->
+    <link href="{% static 'css/halftime-theme.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- jQuery UI -->
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css">
+    {% block extrastyle %}{% endblock %}
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" crossorigin="anonymous"></script>
+
+    <!-- Select2 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <!-- Handlebars -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"
+            crossorigin="anonymous"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.3/js/tether.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+
+    <!-- Material CSS and JS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-deep_purple.min.css"/>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <!-- Moment JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+
+    <!-- FullCalendar JS and CSS -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css'/>
+    <script src="{% static 'js/fullcalendar.js' %}"></script>
+
+    <!-- Theme Javascript -->
+    <script src="{% static 'js/halftime-theme.js' %}"></script>
+
+    <!-- Halftime CSS -->
+    <link href="{% static 'css/halftime.css' %}" rel="stylesheet">
+
+    <!-- Halftime Javascript -->
+    <script src="{% static 'js/halftime.js' %}"></script>
+
+    {% block extrascript %}{% endblock %}
+    {% block extrahead %}{% endblock %}
+</head>
+
+<body class="home page-template-default page page-id-2 wp-custom-logo wp-embed-responsive page-template-front-page has-cta-button has-description header-overlay-medium categories-hidden">
+<div id="page" class="site">
+    <header id="masthead" class="site-header" role="banner">
+        <div class="branding-container">
+            <div class="site-branding">
+                <a href="https://608elitewi.com/" class="custom-logo-link" rel="home"><img width="2438" height="1063"
+                                                                                           src="https://i1.wp.com/608elitewi.com/wp-content/uploads/2019/04/cropped-608logo_v7-02.png?fit=2438%2C1063&amp;ssl=1"
+                                                                                           class="custom-logo jetpack-lazy-image jetpack-lazy-image--handled"
+                                                                                           sizes="(max-width: 2438px) 100vw, 2438px"></a>
+                <p class="site-title"><a href="https://608elitewi.com/" rel="home"></a></p>
+            </div><!-- .site-branding -->
+            <nav id="site-navigation" class="main-navigation" role="navigation">
+                <button class="menu-toggle" aria-controls="top-menu" aria-expanded="false">Menu</button>
+                <div class="menu-primary-container">
+                    <ul id="top-menu" class="menu nav-menu" aria-expanded="false">
+                        <li id="menu-item-48"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48"><a
+                                href="https://608elitewi.com/about/">About</a></li>
+                        <li id="menu-item-43"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-43"
+                            aria-haspopup="true"><a href="https://608elitewi.com/schedules/">Schedules</a>
+                            <ul class="sub-menu">
+                                <li id="menu-item-283"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-283"><a
+                                        href="https://608.soccercal.com/league/nike">Nike</a></li>
+                                <li id="menu-item-285"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-285"><a
+                                        href="https://608.soccercal.com/league/umbro">Umbro</a></li>
+                                <li id="menu-item-284"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-284"><a
+                                        href="https://608.soccercal.com/league/puma">Puma</a></li>
+                                <li id="menu-item-287"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-287"><a
+                                        href="https://608.soccercal.com/team/elevens">11s at 11</a></li>
+                            </ul>
+                        </li>
+                        <li id="menu-item-131"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-131"><a
+                                href="https://608elitewi.com/standings/">Standings</a></li>
+                        <li id="menu-item-9"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-9">
+                            <a href="https://608elitewi.com/news/">News</a></li>
+                        <li id="menu-item-282"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-282"><a
+                                href="https://608elitewi.com/schedules/">Schedules</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+    </header>
+
+    <div class="front-page-wrapper">
+        <div class="header-overlay">
+            <img src="https://608elitewi.com/wp-content/uploads/2019/03/cropped-41019833_963775247146311_9171608511182798848_o-1.jpg"
+                 width="1080" height="499" alt="">
+            <div class="site-description-wrapper">
+                <p class="site-description">MAKING SOCCER 1ST AGAIN</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main" role="main">
+
+                {% block breadcrumbs %} {% endblock %}
+                {% block content %} {% endblock %}
+
+            </main>
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>

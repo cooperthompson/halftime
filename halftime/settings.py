@@ -26,7 +26,7 @@ YEAR_CUTOVER = False
 SECRET_KEY = secrets.DJANGO_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 INTERNAL_IPS = '127.0.0.1'
 ALLOWED_HOSTS = ['*']
 
@@ -36,14 +36,13 @@ BREAKAWAY_START_GAMES_MARKER = "GAMES START"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
 
-S3_ENABLE = True
+S3_ENABLE = False
 if S3_ENABLE:
     DEFAULT_FILE_STORAGE = "django_s3_storage.storage.S3Storage"
     STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
@@ -53,6 +52,8 @@ if S3_ENABLE:
     AWS_S3_CUSTOM_DOMAIN = '{}.s3.amazonaws.com'.format(AWS_S3_BUCKET_NAME_STATIC)
 
     STATIC_URL = "https://{}/{}/".format(AWS_S3_CUSTOM_DOMAIN, 'static')
+else:
+    STATIC_URL = "/static/"
 
 # Application definition
 

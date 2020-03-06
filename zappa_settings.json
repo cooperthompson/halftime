@@ -6,7 +6,7 @@
         "project_name": "halftime",
         "runtime": "python3.6",
         "s3_bucket": "zappa-zgtwsi3jj",
-        "certificate_arn": "arn:aws:acm:us-east-1:460692835503:certificate/85cb609b-6f71-4510-8da3-8310b07ba2d9",
-        "domain": "608.soccercal.com"
+        "certificate_arn": "arn:aws:acm:us-east-1:460692835503:certificate/52df6af2-3688-447f-9818-a155cc125485",
+        "domain": "608elite.com"
     }
 }
