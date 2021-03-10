@@ -6,7 +6,7 @@ certifi==2018.11.29
 cfn-flip==1.1.0.post1
 chardet==3.0.4
 Click==7.0
-Django==2.1.4
+Django==2.2.13
 django-autocomplete-light==3.3.2
 django-debug-toolbar==1.11
 django-filter==2.0.0
@@ -44,7 +44,7 @@ toml==0.10.0
 tqdm==4.19.1
 troposphere==2.3.4
 Unidecode==1.0.23
-urllib3==1.24.1
+urllib3==1.24.2
 Werkzeug==0.15.3
 wsgi-request-logger==0.4.6
 zappa==0.47.1

@@ -1,28 +1,29 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <title>Lumia - Multipurpose responsive bootstrap website template</title>
+  <title>608Elite Soccer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
   <!-- styles -->
-  <link href="assets/css/bootstrap.css" rel="stylesheet">
-  <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
-  <link href="assets/css/prettyPhoto.css" rel="stylesheet">
-  <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
-  <link href="assets/css/flexslider.css" rel="stylesheet">
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/color/default.css" rel="stylesheet">
+  <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/bootstrap-responsive.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/prettyPhoto.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/js/google-code-prettify/prettify.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/flexslider.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/color/default.css' %}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,600,400italic|Open+Sans:400,600,700" rel="stylesheet">
 
   <!-- fav and touch icons -->
-  <link rel="shortcut icon" href="assets/ico/favicon.ico">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="{% static 'assets/ico/favicon.ico' %}">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'assets/ico/apple-touch-icon-144-precomposed.png' %}">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'assets/ico/apple-touch-icon-114-precomposed.png' %}">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'assets/ico/apple-touch-icon-72-precomposed.png' %}">
+  <link rel="apple-touch-icon-precomposed" href="{% static 'assets/ico/apple-touch-icon-57-precomposed.png' %}">
 
   <!-- =======================================================
     Theme Name: Lumia
@@ -43,7 +44,7 @@
           <div class="container">
             <!-- logo -->
             <div class="logo">
-              <a href="index.html"><img src="assets/img/logo.png" alt="" /></a>
+              <a href="index.html"><img src="{% static 'assets/img/logo.png' %}" alt="" /></a>
             </div>
             <!-- end logo -->
 
@@ -121,21 +122,21 @@
             <div id="mainslider" class="flexslider">
               <ul class="slides">
                 <li data-thumb="assets/img/slides/flexslider/img1.jpg">
-                  <img src="assets/img/slides/flexslider/img1.jpg" alt="" />
+                  <img src="{% static 'assets/img/slides/flexslider/img1.jpg' %}" alt="" />
                   <div class="flex-caption primary">
                     <h2>Bootstrap</h2>
                     <p>Lorem ipsum dolor sit amet vix ceteros noluisse intellegat</p>
                   </div>
                 </li>
                 <li data-thumb="assets/img/slides/flexslider/img2.jpg">
-                  <img src="assets/img/slides/flexslider/img2.jpg" alt="" />
+                  <img src="{% static 'assets/img/slides/flexslider/img2.jpg' %}" alt="" />
                   <div class="flex-caption warning">
                     <h2>Responsive layout</h2>
                     <p>Lorem ipsum dolor sit amet vix ceteros noluisse intellegat</p>
                   </div>
                 </li>
                 <li data-thumb="assets/img/slides/flexslider/img3.jpg">
-                  <img src="assets/img/slides/flexslider/img3.jpg" alt="" />
+                  <img src="{% static 'assets/img/slides/flexslider/img3.jpg' %}" alt="" />
                   <div class="flex-caption success">
                     <h2>Rich of features</h2>
                     <p>Lorem ipsum dolor sit amet vix ceteros noluisse intellegat</p>
@@ -173,7 +174,7 @@
 
         <div class="row">
           <div class="span3 features e_pulse">
-            <img src="assets/img/dummies/img1.jpg" alt="" />
+            <img src="{% static 'assets/img/dummies/img1.jpg' %}" alt="" />
             <div class="box">
               <div class="divcenter">
                 <a href="#"><i class="icon-circled icon-48 icon-magic active icon"></i></a>
@@ -183,7 +184,7 @@
           </div>
 
           <div class="span3 features e_pulse">
-            <img src="assets/img/dummies/img2.jpg" alt="" />
+            <img src="{% static 'assets/img/dummies/img2.jpg' %}" alt="" />
             <div class="box">
               <div class="divcenter">
                 <a href="#"><i class="icon-circled icon-48 icon-briefcase icon"></i></a>
@@ -193,7 +194,7 @@
           </div>
 
           <div class="span3 features e_pulse">
-            <img src="assets/img/dummies/img3.jpg" alt="" />
+            <img src="{% static 'assets/img/dummies/img3.jpg' %}" alt="" />
             <div class="box">
               <div class="divcenter">
                 <a href="#"><i class="icon-circled icon-48 icon-cogs icon"></i></a>
@@ -203,7 +204,7 @@
           </div>
 
           <div class="span3 features e_pulse">
-            <img src="assets/img/dummies/img4.jpg" alt="" />
+            <img src="{% static 'assets/img/dummies/img4.jpg' %}" alt="" />
             <div class="box">
               <div class="divcenter">
                 <a href="#"><i class="icon-circled icon-48 icon-bullhorn icon"></i></a>
@@ -232,9 +233,9 @@
                     <ul class="da-thumbs">
 
                       <li>
-                        <img src="assets/img/dummies/work1.jpg" alt="" />
+                        <img src="{% static 'assets/img/dummies/work1.jpg' %}" alt="" />
                         <article class="da-animate da-slideFromRight">
-                          <a class="zoom" data-pretty="prettyPhoto" href="assets/img/dummies/big1.jpg">
+                          <a class="zoom" data-pretty="prettyPhoto" href="{% static 'assets/img/dummies/big1.jpg' %}">
 														<i class="icon-zoom-in icon-rounded icon-48 active"></i>
 													</a>
                           <a href="portfolio-detail.html">
@@ -247,9 +248,9 @@
                       </li>
 
                       <li>
-                        <img src="assets/img/dummies/work2.jpg" alt="" />
+                        <img src="{% static 'assets/img/dummies/work2.jpg' %}" alt="" />
                         <article class="da-animate da-slideFromRight">
-                          <a class="zoom" data-pretty="prettyPhoto" href="assets/img/dummies/big1.jpg">
+                          <a class="zoom" data-pretty="prettyPhoto" href="{% static 'assets/img/dummies/big1.jpg' %}">
 														<i class="icon-zoom-in icon-rounded icon-48 active"></i>
 													</a>
                           <a href="portfolio-detail.html">
@@ -262,9 +263,9 @@
                       </li>
 
                       <li>
-                        <img src="assets/img/dummies/work3.jpg" alt="" />
+                        <img src="{% static 'assets/img/dummies/work3.jpg' %}" alt="" />
                         <article class="da-animate da-slideFromRight">
-                          <a class="zoom" data-pretty="prettyPhoto" href="assets/img/dummies/big1.jpg">
+                          <a class="zoom" data-pretty="prettyPhoto" href="{% static 'assets/img/dummies/big1.jpg' %}">
 														<i class="icon-zoom-in icon-rounded icon-48 active"></i>
 													</a>
                           <a href="portfolio-detail.html">
@@ -277,9 +278,9 @@
                       </li>
 
                       <li>
-                        <img src="assets/img/dummies/work4.jpg" alt="" />
+                        <img src="{% static 'assets/img/dummies/work4.jpg' %}" alt="" />
                         <article class="da-animate da-slideFromRight">
-                          <a class="zoom" data-pretty="prettyPhoto" href="assets/img/dummies/big1.jpg">
+                          <a class="zoom" data-pretty="prettyPhoto" href="{% static 'assets/img/dummies/big1.jpg' %}">
 														<i class="icon-zoom-in icon-rounded icon-48 active"></i>
 													</a>
                           <a href="portfolio-detail.html">
@@ -292,9 +293,9 @@
                       </li>
 
                       <li>
-                        <img src="assets/img/dummies/work5.jpg" alt="" />
+                        <img src="{% static 'assets/img/dummies/work5.jpg' %}" alt="" />
                         <article class="da-animate da-slideFromRight">
-                          <a class="zoom" data-pretty="prettyPhoto" href="assets/img/dummies/big1.jpg">
+                          <a class="zoom" data-pretty="prettyPhoto" href="{% static 'assets/img/dummies/big1.jpg' %}">
 														<i class="icon-zoom-in icon-rounded icon-48 active"></i>
 													</a>
                           <a href="portfolio-detail.html">
@@ -307,9 +308,9 @@
                       </li>
 
                       <li>
-                        <img src="assets/img/dummies/work6.jpg" alt="" />
+                        <img src="{% static 'assets/img/dummies/work6.jpg' %}" alt="" />
                         <article class="da-animate da-slideFromRight">
-                          <a class="zoom" data-pretty="prettyPhoto" href="assets/img/dummies/big1.jpg">
+                          <a class="zoom" data-pretty="prettyPhoto" href="{% static 'assets/img/dummies/big1.jpg' %}">
 														<i class="icon-zoom-in icon-rounded icon-48 active"></i>
 													</a>
                           <a href="portfolio-detail.html">
@@ -414,19 +415,19 @@
   <!-- end wrapper -->
   <a href="#" class="scrollup"><i class="icon-chevron-up icon-square icon-48 active"></i></a>
 
-  <script src="assets/js/jquery.js"></script>
-  <script src="assets/js/raphael-min.js"></script>
-  <script src="assets/js/jquery.easing.1.3.js"></script>
-  <script src="assets/js/bootstrap.js"></script>
-  <script src="assets/js/google-code-prettify/prettify.js"></script>
-  <script src="assets/js/jquery.elastislide.js"></script>
-  <script src="assets/js/jquery.prettyPhoto.js"></script>
-  <script src="assets/js/jquery.flexslider.js"></script>
-  <script src="assets/js/jquery-hover-effect.js"></script>
-  <script src="assets/js/animate.js"></script>
+  <script src="{% static 'assets/js/jquery.js' %}"></script>
+  <script src="{% static 'assets/js/raphael-min.js' %}"></script>
+  <script src="{% static 'assets/js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'assets/js/bootstrap.js' %}"></script>
+  <script src="{% static 'assets/js/google-code-prettify/prettify.js' %}"></script>
+  <script src="{% static 'assets/js/jquery.elastislide.js' %}"></script>
+  <script src="{% static 'assets/js/jquery.prettyPhoto.js' %}"></script>
+  <script src="{% static 'assets/js/jquery.flexslider.js' %}"></script>
+  <script src="{% static 'assets/js/jquery-hover-effect.js' %}"></script>
+  <script src="{% static 'assets/js/animate.js' %}"></script>
 
   <!-- Template Custom JavaScript File -->
-  <script src="assets/js/custom.js"></script>
+  <script src="{% static 'assets/js/custom.js' %}"></script>
 
 </body>
 </html>
