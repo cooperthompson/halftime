@@ -1,0 +1,139 @@
+	TEAM (COLOR)
+1.	V United (Red)
+2.	Beercalona (Green)
+3.	Regal FC (Blue)
+4.	Fireballs (Blue)
+5.	Hot Wheelerz (Black)
+6.	Cat Madness (White)
+7.	The Killers (Red)
+8.	Thundercatz (White)
+9.	WE Tire (Red)
+10.	Pangolin Parade (Red)
+11.	Van Buren Home Loans (Red)
+12.	We peaked in H.S. (White)
+13.	Men of the Nights Watch (Black)
+14.	Minimal Effort (Red)
+15	Le Tigre (Purple)
+16.	Takin Shots (Black)
+17.	Dynamic SC (Red)
+
+GAMES START
+WEEK 1
+Mo.Feb  4
+16-17	6:30
+1-2	7:30
+Tu.Feb  5
+3-4	8:30
+14-15	9:30
+12-13	10:30
+We.Feb   6
+5-6	6:30 2
+7-8	8:30
+10-11	9:30
+
+WEEK 2
+Mo.Feb  11
+17-12	6:30
+10-13	7:30
+Tu.Feb  12
+4-5	8:30
+6-7	9:30
+We.Feb  13
+8-9	6:30 2
+11-15	8:30
+2-3	9:30
+	
+WEEK 3
+Mo.Feb  18
+7-3	6:30
+8-6	7:30
+Tu.Feb  19
+14-12	8:30
+1-5	9:30
+We.Feb  20
+9-2	6:30 2
+16-11	8:30
+15-10	9:30
+
+WEEK 4
+Mo.Feb  25
+16-10	6:30
+17-14	7:30
+Tu.Feb  26
+4-9	8:30
+1-8	9:30
+We.Feb. 27
+2-7	6:30 2
+3-5	8:30
+13-11	9:30
+
+WEEK 5
+Mo.Mar  4
+15-16	6:30
+17-10	7:30
+Tu.Mar   5
+1-4	8:30
+12-11	9:30
+We.Mar  6
+3-8	6:30 2
+2-6	8:30
+7-9	9:30
+
+WEEK 6
+Mo.Mar  11
+11-17	6:30
+1-9	7:30
+Tu.Mar  12
+10-14	8:30
+4-2	9:30
+We.Mar  13
+15-13	6:30 2
+8-5	8:30
+6-3	9:30
+
+WEEK 7
+Mo.Mar 18
+9-5	6:45
+8-2	7:45
+Tu.Mar  19
+14-11	8:30
+6-4	9:30
+We.Mar 20
+1-7	6:30 2
+12-10	8:30
+16-13	9:30
+
+WEEK 8
+Mo.Mar 25
+5-7	6:30
+16-17	7:30
+Tu.Mar  26
+14-15	8:30
+3-4	9:30
+We.Mar 27
+12-13	6:30 2
+1-6	8:30
+9-8	9:30
+
+WEEK 9
+Mo.Apr  1
+14-16	6:30
+13-17	7:30
+Tu.Apr  2
+10-11	8:30
+12-15	9:30
+We.Apr  3
+2-5	6:30 2
+6-9	8:30
+
+Week 10
+Mo.Apr  8
+17-15	6:30 2
+1-3	8:30
+Tu.Apr   9
+13-14	8:30
+4-7	9:30
+We.Apr  10
+16-12	7:30
+	
+

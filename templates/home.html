@@ -10,6 +10,36 @@
 {% endblock %}
 
 {% block content %}
+        <!-- About Section -->
+    <section class="success content-section" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>608 Elite</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+
+                    <p class="text-center">608elite was created to give people a place to play affordable, competitive
+                        soccer in a welcoming environment.</p>
+
+                    <p class="text-center">The goal from day one was to “Make Soccer 1st Again” and every session starts
+                        with that in mind. The placement of teams, the referees assigned to each game and the constant
+                        communication were designed around that culture.</p>
+
+                    <p class="text-center">This has always been more than a business to me. I care about everyone that
+                        comes out to play and gives me a chance to deliver a quality product. Your continued support is
+                        the heart of my success.</p>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <!-- Games Grid Section -->
     <section id="games" class="content-section">
         <div class="container">
@@ -21,48 +51,48 @@
                 </div>
             </div>
             <div class="row">
-            {% if games %}
-                <table class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>Field</th>
-                        <th>Home Team</th>
-                        <th>Away Team</th>
-                        <th>Game Time</th>
-                        <th>Game Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for game in games %}
+                {% if games %}
+                    <table class="table table-bordered table-striped">
+                        <thead>
                         <tr>
-                            <td>{{ game.field }}</td>
-                            <td>
-                                <a href="{% url 'team' game.home_team.slug %}"
-                                   title="{{ game.home_team }}">
-                                    {{ game.home_team.name }}({{ game.home_team.color }})
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{% url 'team' game.away_team.slug %}"
-                                   title="{{ game.away_team }}">
-                                    {{ game.away_team.name }}({{ game.away_team.color }})
-                                </a>
-                                {% if game.color_conflict %}
-                                    <span class="glyphicon glyphicon-flag" title="Color conflict"></span>
-                                {% endif %}
-                            </td>
-                            <td>{{ game.time|time:"g:i a" }}</td>
-                            <td>
-                                {{ game.time|date:"M d (l)" }}
-                                {% if game.is_today %}
-                                    <span class="glyphicon glyphicon-calendar" title="Today"></span>
-                                {% endif %}</td>
-
+                            <th>Field</th>
+                            <th>Home Team</th>
+                            <th>Away Team</th>
+                            <th>Game Time</th>
+                            <th>Game Date</th>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            {% endif %}
+                        </thead>
+                        <tbody>
+                        {% for game in games %}
+                            <tr>
+                                <td>{{ game.field }}</td>
+                                <td>
+                                    <a href="{% url 'team' game.home_team.slug %}"
+                                       title="{{ game.home_team }}">
+                                        {{ game.home_team.name }}({{ game.home_team.color }})
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'team' game.away_team.slug %}"
+                                       title="{{ game.away_team }}">
+                                        {{ game.away_team.name }}({{ game.away_team.color }})
+                                    </a>
+                                    {% if game.color_conflict %}
+                                        <span class="glyphicon glyphicon-flag" title="Color conflict"></span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ game.time|time:"g:i a" }}</td>
+                                <td>
+                                    {{ game.time|date:"M d (l)" }}
+                                    {% if game.is_today %}
+                                        <span class="glyphicon glyphicon-calendar" title="Today"></span>
+                                    {% endif %}</td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
             </div>
         </div>
 
@@ -107,6 +137,7 @@
         </div>
     </section>
 
+
     <!-- Leagues Grid Section -->
     <section id="leagues" class="content-section">
         <div class="container">
@@ -129,25 +160,6 @@
                         </span>
                     </span>
                 {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="success content-section" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>About</h2>
-                    <hr class="star-light">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <p class="text-center">Halftime includes online soccer schedules from Madison area leagues
-                        in a online format. You can sync your team's schedule to your phone,
-                        Google Calendar, or other popular calendar application.</p>
-                </div>
             </div>
         </div>
     </section>
@@ -180,7 +192,7 @@
                 }
             }).fullCalendar('addEventSource', '{% url 'events' %}');
 
-            $('#subscribe-ics').click(function(event) {
+            $('#subscribe-ics').click(function (event) {
                 event.preventDefault();
                 var queryParams = "?";
                 $('#team-picker').select2('data').forEach(function (team) {

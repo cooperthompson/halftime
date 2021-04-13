@@ -1,0 +1,10 @@
+Underwhelming FC	dark blue	37
+Metro United	black	38
+Regal FC	grey	39
+Hot Wheelerz FC	black	40
+Burbridge Tickles	light blue	41
+Tom Mackey	red	42
+Pelicans	yellow	43
+Deportivo	white	44
+PPI JV Third String	dark green	45
+Bulldogs	green	46

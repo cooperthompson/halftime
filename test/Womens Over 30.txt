@@ -1,0 +1,83 @@
+	TEAM (COLOR)
+1.	Going Green (Green)
+2.	Hot Tamales (Red)
+3.	HCCI (Grey)
+4.	It Wasn’t Easy Being Green (Blue)
+5.	Back in Action (White)
+6.	Recreational Hazard (Black)
+7.	Kixx (Lime)
+8.	Goals Just Wanna Have Fun (Purple)
+
+
+GAMES START
+WEEK 2
+Su.Feb  10
+PM	Games
+3-4	6:002
+5-6	7:002
+1-2	8:002
+TU.Feb  12
+7-8	6:30
+
+WEEK 3
+Su.Feb   17
+PM	Games
+1-4	6:302
+2-6	7:302
+5-7	8:302
+TU.Feb  19
+8-3	6:30
+
+WEEK 4
+Su.Feb  24
+PM	Games
+7-2	6:002
+5-3	7:002
+4-8	8:002
+TU.Feb  26
+6-1	6:30
+
+WEEK 5
+Su.Mar  3
+PM	Games
+7-1	6:002
+3-6	7:002
+4-2	8:002
+TU.Mar  5
+8-5	6:30
+
+WEEK 6
+Su.Mar  10
+PM	Games
+3-2	6:002
+4-5	7:002
+6-7	8:002
+TU.Mar  12
+8-1	6:30
+
+WEEK 7
+Su.Mar  17
+PM	Games
+6-4	6:002
+1-5	7:002
+7-3	8:002
+TU.Mar  19
+2-8	6:30
+
+WEEK 8
+Su.Mar.  24
+PM	Games
+3-1	4:002
+8-6	5:002
+7-4	6:002
+TU.Mar  26
+5-2	6:30
+
+WEEK 9
+Su.Mar   31
+5-6	5:002
+1-2	6:002
+3-4	7:002
+TU.Apr   2
+7-8	6:30
+

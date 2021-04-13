@@ -1,0 +1,37 @@
+	TEAM (COLOR)
+1	Mamba’s (White)
+2.	Canada (White)
+3.	Ice Breakers (White)
+4.	Look Mom No Hands (White)
+
+WEEK 2
+Su.Feb  10
+1-2 v 3-4		5:00 2
+
+WEEK 3
+Su.Feb   17
+2-3 v 1-4		5:30 2
+
+WEEK 4
+Su.Feb  24
+2-4 v 1-3		5:00
+
+WEEK 5
+Su.Mar  3
+3-4 v 1-2		5:00
+
+WEEK 6
+Su.Mar  10
+1-4 v 2-3		5:00
+
+WEEK 7
+Su.Mar  17
+1-3 v 2-4		5:00
+
+WEEK 8
+Su.Mar.  24
+1-2 v 3-4		7:00 2
+
+WEEK 9
+Su.Mar   31
+2-3 v 1-4		4:00 2

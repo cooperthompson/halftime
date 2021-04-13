@@ -1,0 +1,20 @@
+Pups	silver	1
+Seagulls	white	2
+Atomic Flea	black	3
+MTP	peach	4
+Team Soccer Team	red	5
+Washed Up	black	6
+Kollege Kids	purple	7
+Hot Shots	red	8
+Sir Charles	pink	9
+Whistlers	blue	10
+Man Bear Pig	neon	11
+Karla Kickers	red	12
+Fighting Bobs	black	13
+Screaming Chamellions	green	14
+The Old and Fats	orange	15
+Chamellionaires	green	16
+Ripp	green	17
+Hooligans	black	18
+Thunder Thighs	purple	19
+Bet Fire		20
