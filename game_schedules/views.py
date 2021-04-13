@@ -38,7 +38,8 @@ def league_view(request, slug):
     context = {
         'teams': teams,
         'league': league,
-        'games': games
+        'games': games,
+        'leagues': League.objects.all().order_by('org')
     }
     return HttpResponse(template.render(context, request=request))
 
@@ -53,7 +54,8 @@ def team_view(request, slug):
     template = loader.get_template('team.html')
     context = {
         'games': games,
-        'team': team
+        'team': team,
+        'leagues': League.objects.all().order_by('org')
     }
     return HttpResponse(template.render(context, request=request))
 
@@ -88,5 +90,6 @@ def standings(request, slug):
     context = {
         'teams': teams,
         'league': league,
+        'leagues': League.objects.all().order_by('org')
     }
     return HttpResponse(template.render(context, request=request))

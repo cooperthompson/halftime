@@ -1,0 +1,118 @@
+	TEAM (COLOR)
+1.	Skullbusters (White)
+2.	Stupor Good (Black)
+3.	Van Buren Home Loans (Red)
+4.	Internationals (Black)
+5.	Madison United Silverbacks(Blue)
+6.	MGFC (Grey)
+7.	Laurel Tavern Pangolins (green) 
+8.	FC Bari (White)
+9.	Wheezers (Red)
+10.	Dinamo (White)
+11. 	FC United (Pink)
+12.	Trolls (Blue)
+13.	Grumpy Old Men (Purple)
+14.	Off the Wall (Blue)
+15.	Husky Lads FC (Green)
+16. 	Nano Jets (Yellow)
+17.	Big Kids (Orange)
+
+GAMES START
+WEEK 1
+Th.Feb   7
+17-10	6:30
+13-14	6:302
+15-16	7:302
+3-4	7:30
+7-8	8:30
+5-6	8:302
+11-12	9:302
+1-2	9:30
+
+WEEK 2
+Th.Feb   7
+17-10	6:30
+13-14	7:302
+15-16	7:30
+3-4	8:30
+7-8	8:302
+5-6	9:302
+11-12	9:30
+
+WEEK 3
+Th.Feb   7
+10-15	6:30
+1-8	7:302
+17-11	7:30
+2-7	8:30
+14-12	8:302
+4-9	9:302
+13-16	9:30
+
+WEEK 4
+Th.Feb  28
+4-5	6:30
+2-3	7:302
+13-12	7:30
+16-17	8:30
+8-9	8:302
+6-7	9:302
+14-15	9:30
+
+
+
+WEEK 5
+Th.Mar   7
+6-3	6:30
+1-9	7:302
+8-5	7:30
+11-15	8:30
+12-10	8:302
+17-13	9:302
+4-2	9:30
+
+WEEK 6
+Th.Mar  14
+7-9	6:30
+16-11	7:302
+17-12	7:30
+15-13	8:30
+1-4	8:302
+14-10	9:302
+3-8	9:30
+
+WEEK 7
+Th.Mar 21
+8-2	6:30
+1-7	7:302
+13-11	7:30
+17-14	8:30
+6-4	8:302
+9-5	9:302
+10-16	9:30
+	
+WEEK 8
+Th.Mar 28
+7-3	6:30
+1-5	6:302
+17-10	7:302
+13-14	7:30
+9-2	8:30
+15-16	8:302
+11-12	9:302
+8-6	9:30
+
+WEEK 9
+Th.Apr  4
+4-8	6:302
+15-12	7:302
+16-14	7:30
+2-6	8:30
+3-5	8:302
+Th.Apr  11
+10-11	6:302
+6-9	7:302
+2-5	7:30
+4-7	8:30
+1-3	9:30
+

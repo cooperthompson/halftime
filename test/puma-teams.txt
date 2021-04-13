@@ -1,0 +1,18 @@
+1	Wombats	blue	Competitive
+2	Corinthians	black	Competitive
+3	Sasquatch	red	Competitive
+4	Tubbies	white	Competitive
+5	Team with no name	red	Competitive
+6	Leave my Arselona	orange	Competitive
+7	Bluth Norris	blue	Competitive
+8	EC	blue	Competitive
+9	Kinda Athletico	green	Rec
+10	Hope-Alicious	red	Rec
+11	PTT	blue	Rec
+12	Washed Up Hand Models	red	Rec
+13	SFC	black	Rec
+14	608 FC	blue	Rec
+15	Hellbenders	red	Rec
+16	Giannis Upon Us	white	Rec
+17	Drinking Team	pink	Rec
+18	Mei	red	Rec
